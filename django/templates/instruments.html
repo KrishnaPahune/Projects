@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instruments</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body style="background-image: url('instruments.jpg'); background-size: cover; background-position: center;">
+    <div class="container py-5">
+        <h2 class="text-center mb-5">Spiritual Instruments</h2>
+
+        <!-- Search Bar -->
+        <div class="row mb-4">
+            <div class="col-md-6 offset-md-3">
+                <input type="text" id="instrumentSearch" onkeyup="searchItems()" class="form-control" placeholder="Search for Instruments...">
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="veena.jpg" class="card-img-top" alt="Veena">
+                    <div class="card-body">
+                        <h5 class="card-title">Veena</h5>
+                        <p class="card-text">$2500</p>
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="tabla.jpg" class="card-img-top" alt="Tabla">
+                    <div class="card-body">
+                        <h5 class="card-title">Tabla</h5>
+                        <p class="card-text">$1500</p>
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="flute.jpg" class="card-img-top" alt="Flute">
+                    <div class="card-body">
+                        <h5 class="card-title">Flute</h5>
+                        <p class="card-text">$500</p>
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function searchItems() {
+            let input = document.getElementById('instrumentSearch').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getElementsByClassName('card-title')[0].innerText.toLowerCase();
+                if (title.includes(input)) {
+                    cards[i].parentElement.style.display = "";
+                } else {
+                    cards[i].parentElement.style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

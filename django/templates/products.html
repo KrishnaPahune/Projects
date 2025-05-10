@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Our Products{% endblock %}
+{% block body %}
+
+<section id="products" style="background-image: url('{% static "1218448-mandala.jpg" %}'); 
+background-size: cover; 
+background-position: center;
+height: 100vh; display: flex; align-items: center; justify-content: center;">
+    <div class="container">
+      <h2 class="text-center mb-5">Explore Spiritual Products</h2>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card text-center">
+            <img src="{% static 'ganesh_ji.jpeg' %}" class="card-img-top" alt="Idols">
+            <div class="card-body">
+              <h5 class="card-title">Deity Idols</h5>
+              <a href="idols.html" class="btn btn-primary">Shop Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center">
+            <img src="{% static 'bhagvad-geeta.jpg' %}" class="card-img-top" alt="Scriptures">
+            <div class="card-body">
+              <h5 class="card-title">Holy Scriptures</h5>
+              <a href="books.html" class="btn btn-primary">Shop Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center">
+            <img src="{% static 'vena.jpeg' %}" class="card-img-top" alt="Instruments">
+            <div class="card-body">
+              <h5 class="card-title">Instruments</h5>
+              <a href="instruments.html" class="btn btn-primary">Shop Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center">
+            <img src="{% static 'mat.jpg' %}" class="card-img-top" alt="Wellness Products">
+            <div class="card-body">
+              <h5 class="card-title">Wellness Products</h5>
+              <a href="wellness.html" class="btn btn-primary">Shop Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock body %}

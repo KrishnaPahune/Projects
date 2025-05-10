@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Join Us{% endblock %}
+{% block body %}
+<section id="contact" style="background-image: url('{% static "1218448-mandala.jpg" %}'); 
+background-size: cover; 
+background-position: center;
+height: 100vh; display: flex; align-items: center; justify-content: center;">
+<div class="form-container p-5 rounded-4 shadow-lg" style="background: rgba(255, 255, 255, 0.15); 
+                                                               backdrop-filter: blur(10px); 
+                                                               max-width: 500px; width: 100%; color: white;">
+        <h2 class="text-center mb-4">Contact Us</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-light px-4">Send</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} <section id="cta" class="py-5 text-white" style="background-color: #333;">
+    <div class="container text-center">
+      <h2>Join Our Spiritual Journey</h2>
+      <p class="lead">Sign up for our newsletter and get the latest spiritual teachings, media, and products.</p>
+      <a href="#newsletter" class="btn btn-light btn-lg">Subscribe Now</a>
+    </div>
+</section>
+      
+      <section id="newsletter" class="py-5">
+        <div class="container text-center">
+          <h2>Stay Updated</h2>
+          <p>Get the latest updates on spiritual products, movies, and teachings directly to your inbox.</p>
+          <form class="form-inline justify-content-center">
+            <input type="email" class="form-control mr-2" placeholder="Enter your email">
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+        </div>
+      </section> {% endcomment %}
+{% endblock body %}

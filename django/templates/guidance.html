@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Guidance{% endblock %}
+{% block body %}
+<section id="guidance" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{% static "1218448-mandala.jpg" %}'); 
+background-size: cover; 
+background-position: center;
+height: 100vh; display: flex; align-items: center; justify-content: center;">
+        <div class="container text-center">
+          <h2 class="mb-4">Guidance & Mentorship</h2>
+          <p class="lead">Connect with spiritual masters from around the world for live interactions, mentorship, and guidance on your spiritual journey.</p>
+          
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card text-center">
+                <img src="{% static 'sadguru1.jpg' %}" id ="Sadhguru" class="card-img-top" alt="Master 1">
+                <div class="card-body">
+                  <h5 class="card-title">Master Sadhguru</h5>
+                  <p class="card-text">Join live sessions with Sadhguru to gain insights into meditation and self-realization.</p>
+                  <a href="#" class="btn btn-primary">Join Session</a>
+                </div>
+              </div>
+            </div>
+      
+            <div class="col-md-4">
+              <div class="card text-center">
+                <img src="{% static 'radhesham.jpg' %}" id="radhesham" class="card-img-top" alt="Master 2">
+                <div class="card-body">
+                  <h5 class="card-title">Radheshyam Das</h5>
+                  <p class="card-text">Experience spiritual discourses with Radheshyam Das to deepen your understanding of ancient texts.</p>
+                  <a href="#" class="btn btn-primary">Join Session</a>
+                </div>
+              </div>
+            </div>
+      
+            <div class="col-md-4">
+              <div class="card text-center">
+                <img src="{% static 'ramdev.jpeg' %}" id="ramdev" class="card-img-top" alt="Master 3">
+                <div class="card-body">
+                  <h5 class="card-title">Swami Ramdev</h5>
+                  <p class="card-text">Attend live yoga sessions with Swami Ramdev for physical, mental, and spiritual wellness.</p>
+                  <a href="#" class="btn btn-primary">Join Session</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock body %}

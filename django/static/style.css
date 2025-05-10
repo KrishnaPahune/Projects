@@ -1,0 +1,288 @@
+/* General styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+h1, h2, h5 {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    color: #444;
+}
+
+p {
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff; /* Default link color */
+}
+
+/* Remove general hover color for links */
+a:hover {
+    text-decoration: underline; /* Keep underline on hover */
+}
+
+/* Navbar */
+.navbar {
+    z-index: 10; /* Ensure the navbar stays above other elements */
+}
+
+/* Position the alert messages at the bottom */
+.alert-wrapper {
+    position: fixed;
+    bottom: 20px; /* Adjust the distance from the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050; /* Ensure it appears above other elements */
+    width: 90%; /* Adjust width as needed */
+    max-width: 500px; /* Limit the maximum width */
+}
+
+.logout-btn {
+    margin-left: 4px;
+}
+/* Home Banner Section */
+#home {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
+    margin-top: 0; /* Ensure no gap between navbar and section */
+    position: relative;
+}
+
+#home .container {
+    text-align: center;
+}
+
+#home h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+#home p {
+    font-size: 1.2rem;
+    color: #ddd;
+}
+
+#home .btn-primary {
+    border-color: #007bff;
+}
+
+#home .btn-outline-light {
+    color: #fff;
+    border-color: #fff;
+}
+.btn-outline-light:hover {
+    color: #fff; /* Keep text color the same on hover */
+    background-color: transparent; /* Keep background transparent */
+    border-color: #fff; /* Keep border color the same on hover */
+}
+
+
+
+blockquote {
+    font-size: 1.5rem;
+    font-style: italic;
+    padding: 1.5rem;
+    color: black;
+    background-color: #fff;
+    border-left: 5px solid #007bff;
+}
+
+.blockquote-footer {
+    font-size: 1rem;
+    color: white !important;
+    text-align: center;
+}
+#guidance h2{
+    color: #fff !important;
+}
+#guidance .lead{
+    color: #fff !important;
+}
+
+/* Product Categories */
+#products {
+    padding: 60px 0;
+    margin: 0rem !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+#products h2 {
+    margin-bottom: 40px;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    height: 500px !important;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card img {
+    width: 100%;
+    height: 300px !important;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-top: 15px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+.wisdom {
+  padding-top: 100px;
+  text-align: center;
+}
+/* Featured Spiritual Media */
+#media {
+    background-color: #f9f9f9;
+    margin-left: 0rem !important;
+}
+
+#media .card {
+    margin-bottom: 30px;
+}
+
+#media .card-title {
+    font-size: 1.5rem;
+}
+
+#media .btn-primary {
+    background-color: #28a745;
+    border: none;
+}
+
+#media .btn-primary:hover {
+    background-color: #218838;
+}
+#ramdev {
+    height: fit-content;
+}
+#Sadhguru {
+    height: fit-content;
+}
+#radhesham {
+    height: fit-content;
+}
+
+
+/* Testimonials */
+#testimonials {
+    padding: 60px 0;
+}
+
+#testimonials blockquote {
+    background-color: #fff;
+    border-left: 5px solid #007bff;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+#testimonials blockquote p {
+    font-size: 1.2rem;
+}
+
+#testimonials blockquote footer {
+    font-size: 0.9rem;
+    color: #555 !important; 
+}
+
+/* Newsletter */
+#newsletter {
+    background-color: #f9f9f9;
+    padding: 60px 0;
+    text-align: center;
+}
+
+#newsletter h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#newsletter input[type="email"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 300px;
+    max-width: 100%;
+}
+
+#newsletter button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+#newsletter button:hover {
+    background-color: #0056b3;
+}
+
+/* Footer */
+#footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* Sticky Footer Fix */
+html, body {
+    height: 100%; /* Ensure the body and html take up the full height of the viewport */
+}
+
+#content {
+    min-height: 100%; /* Ensure the content takes up at least the full height of the viewport */
+    display: flex;
+    flex-direction: column;
+}
+
+#content > main {
+    flex: 1; /* Push the footer to the bottom */
+}
+main {
+    flex: 1; /* Allow main content to grow and push footer down */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    #home h1 {
+        font-size: 2.5rem;
+    }
+    #home p {
+        font-size: 1rem;
+    }
+
+    #cta h2 {
+        font-size: 2rem;
+    }
+
+    .blockquote p {
+        font-size: 1.2rem;
+    }
+}
+.mb-5{
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #fff !important;
+}
+.col-md-4 {
+    height: 400px;
+}

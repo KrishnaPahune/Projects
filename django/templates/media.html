@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Our Products{% endblock %}
+{% block body %}
+
+<section id="media" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{% static "1218448-mandala.jpg" %}'); 
+background-size: cover; 
+background-position: center;
+height: 100vh; display: flex; align-items: center; justify-content: center;">
+  <div class="container">
+    <h2 class="text-center mb-5">Watch & Listen to Spiritual Media</h2>
+
+    <div id="mediaCarousel" class="carousel slide carousel-light" data-bs-ride="carousel" data-bs-interval="4000">
+      <div class="carousel-inner">
+
+        <div class="carousel-item active">
+          <div class="card mx-auto" style="max-width: 600px;">
+            <img src="{% static 'movie.jpg' %}" class="card-img-top" alt="Spiritual Movie" style="height: 300px; object-fit: cover;">
+            <div class="card-body text-center">
+              <h5 class="card-title">Spiritual Movies</h5>
+              <p class="card-text">Enjoy our collection of enlightening spiritual films and documentaries.</p>
+              <a href="#" class="btn btn-primary">Watch Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="card mx-auto" style="max-width: 600px;">
+            <img src="{% static 'music.jpg' %}" class="card-img-top" alt="Spiritual Music" style="height: 300px; object-fit: cover;">
+            <div class="card-body text-center">
+              <h5 class="card-title">Spiritual Music & Mantras</h5>
+              <p class="card-text">Listen to soothing devotional music and powerful mantras.</p>
+              <a href="#" class="btn btn-primary">Listen Now</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Carousel Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#mediaCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#mediaCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
+</section>
+{% endblock body %}

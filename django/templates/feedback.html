@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Join Us{% endblock %}
+{% block body %}
+{% load static %}
+<section id="testimonials" class="py-5 bg-light" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{% static "1218448-mandala.jpg" %}'); 
+background-size: cover; 
+background-position: center;
+height: 100vh; display: flex; align-items: center; justify-content: center;">
+    <div class="container">
+      <h2 class="text-center mb-5">What Our Community Says</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <blockquote class="blockquote">
+            <p>"This platform has transformed my spiritual journey. The idols and scriptures are authentic and bring peace into my home."</p>
+            <footer class="blockquote-footer">John Doe</footer>
+          </blockquote>
+        </div>
+        <div class="col-md-4">
+          <blockquote class="blockquote">
+            <p>"The spiritual music here is my go-to for meditation. It brings tranquility and focus into my practice."</p>
+            <footer class="blockquote-footer">Jane Smith</footer>
+          </blockquote>
+        </div>
+        <div class="col-md-4">
+          <blockquote class="blockquote">
+            <p>"A one-stop-shop for all spiritual needs. From products to courses, this platform is truly divine."</p>
+            <footer class="blockquote-footer">Rajesh Kumar</footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock body %}

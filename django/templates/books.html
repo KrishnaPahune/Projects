@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holy Scriptures</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body style="background-image: url('books.jpg'); background-size: cover; background-position: center;">
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Holy Scriptures</h2>
+
+        <!-- Search Bar -->
+        <div class="row mb-4">
+            <div class="col-md-6 mx-auto">
+                <input type="text" class="form-control" placeholder="Search for books..." id="bookSearch" onkeyup="searchItems()">
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <h5>Filter by:</h5>
+                <label for="priceRange">Price Range:</label>
+                <select id="priceRange" class="form-control">
+                    <option value="all">All</option>
+                    <option value="0-500">Below $500</option>
+                    <option value="500-1000">$500 - $1000</option>
+                    <option value="1000-5000">$1000 - $5000</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Product Cards -->
+        <div class="row" id="bookCards">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="geeta.jpg" class="card-img-top" alt="Bhagavad Geeta">
+                    <div class="card-body">
+                        <h5 class="card-title">Bhagavad Geeta</h5>
+                        <p class="card-text">$600</p>
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="ramayan.jpg" class="card-img-top" alt="Ramayan">
+                    <div class="card-body">
+                        <h5 class="card-title">Ramayan</h5>
+                        <p class="card-text">$800</p>
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="vedas.jpg" class="card-img-top" alt="Vedas">
+                    <div class="card-body">
+                        <h5 class="card-title">Vedas</h5>
+                        <p class="card-text">$1200</p>
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function searchItems() {
+            let input = document.getElementById('bookSearch').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getElementsByClassName('card-title')[0].innerText.toLowerCase();
+                if (title.includes(input)) {
+                    cards[i].parentElement.style.display = "";
+                } else {
+                    cards[i].parentElement.style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block body %}
+<section id="home" style="background-image: url('{% static "1218448-mandala.jpg" %}'); background-size: cover; background-position: center;">
+  <div class="container text-center text-white" style="padding: 100px 0;">
+    <h1 class="display-4">Welcome to the Spiritual Realm</h1>
+    <p class="lead">Discover sacred scriptures, idols, spiritual music, and guidance all in one place.</p>
+    <a href="#products" class="btn btn-outline-light btn-lg mt-4" onmouseover="this.style.backgroundColor='transparent';">Explore Spiritual Products.</a>
+    
+    <a href="#media" class="btn btn-outline-light btn-lg mt-4" onmouseover="this.style.backgroundColor='transparent';">Watch Spiritual Movies.</a>
+  </div>
+</section>
+{% endblock body %}

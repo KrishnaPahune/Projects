@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness Products</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body style="background-image: url('wellness.jpeg'); background-size: cover; background-position: center;">
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Wellness Products</h2>
+
+        <!-- Search Bar -->
+        <div class="row mb-4">
+            <div class="col-md-6 mx-auto">
+                <input type="text" class="form-control" placeholder="Search for wellness products..." id="wellnessSearch" onkeyup="searchItems()">
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <h5>Filter by:</h5>
+                <label for="priceRange">Price Range:</label>
+                <select id="priceRange" class="form-control">
+                    <option value="all">All</option>
+                    <option value="0-1000">Below $1000</option>
+                    <option value="1000-5000">$1000 - $5000</option>
+                    <option value="5000-10000">$5000 - $10000</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Product Cards -->
+        <div class="row" id="wellnessCards">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="yogamat.jpg" class
+                    class="card-img-top" alt="Yoga Mat">
+                    <div class="card-body">
+                        <h5 class="card-title">Yoga Mat</h5>
+                        <p class="card-text">$1200</p>
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="herbal-tea.jpg" class="card-img-top" alt="Herbal Tea">
+                    <div class="card-body">
+                        <h5 class="card-title">Herbal Tea</h5>
+                        <p class="card-text">$500</p>
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="meditation-cushion.jpg" class="card-img-top" alt="Meditation Cushion">
+                    <div class="card-body">
+                        <h5 class="card-title">Meditation Cushion</h5>
+                        <p class="card-text">$1500</p>
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function searchItems() {
+            let input = document.getElementById('wellnessSearch').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getElementsByClassName('card-title')[0].innerText.toLowerCase();
+                if (title.includes(input)) {
+                    cards[i].parentElement.style.display = "";
+                } else {
+                    cards[i].parentElement.style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
