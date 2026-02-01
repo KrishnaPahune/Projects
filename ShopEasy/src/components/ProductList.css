@@ -1,0 +1,50 @@
+.container{
+   
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 0px;
+}
+.product{
+    border: 2px solid green;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    height: 350px;
+    width: 240px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+.product img{
+    width: 150px;
+    height: 200px;
+}
+
+.product p{
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+.product button{
+    background-color: blue;
+    color: white;
+    padding: 5px 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    
+}
+.product:hover{
+transform: translateY(-5px);
+}
+
+.productCount{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.productCount button{
+    font-size: 30px;
+
+}
