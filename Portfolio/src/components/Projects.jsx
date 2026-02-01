@@ -45,6 +45,13 @@ function Projects() {
       githubUrl: 'https://github.com/KrishnaPahune/Projects/tree/f4153067fe2c6d05e2940d727a8c3a328718e96f/Random%20password%20generater',
       liveUrl: 'https://password-generator-gray-sigma.vercel.app/',
     },
+    {
+      title: 'Role The Dice Game',
+      description: 'A simple dice rolling game built with React and JavaScript.',
+      techStack: ['JavaScript', 'HTML', 'CSS'],
+      githubUrl: 'https://github.com/KrishnaPahune/Projects/tree/4730ac37d5cd82c9e870990156370791a542fabb/RollIt',
+      liveUrl: 'https://roll-the-dice-xi.vercel.app/',
+    },
   ];
   return (
     <section id="projects" className="projects">
