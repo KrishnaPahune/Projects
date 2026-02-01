@@ -1,0 +1,71 @@
+.education {
+  padding: 5rem 0;
+  background-color: #ffffff;
+}
+
+.education-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.education-title {
+  font-size: 2rem;
+  color: #111827;
+  margin-bottom: 3rem;
+}
+
+.education-list {
+  max-width: 48rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.education-item {
+  border-left: 2px solid #0891b2;
+  padding-left: 1.5rem;
+}
+
+.education-header {
+  margin-bottom: 0.5rem;
+}
+
+.education-degree {
+  font-size: 1.25rem;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.education-institution {
+  color: #1e40af;
+  margin-bottom: 0.25rem;
+}
+
+.education-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.education-year {
+  color: #6b7280;
+}
+
+.education-percentage {
+  color: #374151;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .education-title {
+    font-size: 2.25rem;
+  }
+
+  .education-details {
+    flex-direction: row;
+    gap: 1rem;
+  }
+}
