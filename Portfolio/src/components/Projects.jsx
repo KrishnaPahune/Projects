@@ -29,7 +29,7 @@ function Projects() {
       description: 'Packers and Movers Website with responsive design and user-friendly interface.',
       techStack: ['JavaScript', 'HTML', 'CSS'],
       githubUrl: 'https://github.com/KrishnaPahune/Projects/tree/f4153067fe2c6d05e2940d727a8c3a328718e96f/Expresso',
-      liveUrl: 'https://expresso-nkn5kscci-krishna-gajanan-pahunes-projects.vercel.app/',
+      liveUrl: 'https://expresso-sage.vercel.app/',
     },
     {
       title: 'Alphabet Game',
