@@ -1,30 +1,24 @@
-import { Mail, Linkedin, Github } from 'lucide-react';
-import { useState } from 'react';
-import './Contact.css';
+import { Mail, Linkedin, Github } from "lucide-react";
+import { useState } from "react";
+import "./Contact.css";
 function Contact() {
-   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
   });
   const handleSubmit = (e) => {
   e.preventDefault();
 
   const { name, email, message } = formData;
 
-  const gmailURL =
-    `https://mail.google.com/mail/?view=cm&fs=1` +
-    `&to=krishnapahune4@gmail.com` +
-    `&su=${encodeURIComponent(`Portfolio Contact from ${name}`)}` +
-    `&body=${encodeURIComponent(
+  const mailtoLink = `mailto:krishnapahune4@gmail.com
+    ?subject=${encodeURIComponent(`Portfolio Contact from ${name}`)}
+    &body=${encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
     )}`;
 
-  window.open(gmailURL, "_blank");
-
-  alert('Gmail opened. Please click Send to complete your message.');
-
-  setFormData({ name: '', email: '', message: '' });
+  window.location.href = mailtoLink;
 };
 
 
@@ -35,17 +29,18 @@ function Contact() {
     });
   };
   return (
-<section id="contact" className="contact">
+    <section id="contact" className="contact">
       <div className="contact-container">
         <h2 className="contact-title">Contact</h2>
         <div className="contact-grid">
           <div className="contact-info">
             <p className="contact-intro">
-              Feel free to reach out for opportunities, collaborations, or just to connect!
+              Feel free to reach out for opportunities, collaborations, or just
+              to connect!
             </p>
             <div className="contact-links">
               <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=krishnapahune4@gmail.com&su=Portfolio Contact"
+                href="mailto:krishnapahune4@gmail.com"
                 className="contact-link"
               >
                 <Mail size={20} />
@@ -57,7 +52,7 @@ function Contact() {
                 rel="noopener noreferrer"
                 className="contact-link"
               >
-              <Linkedin size={20} />
+                <Linkedin size={20} />
                 linkedin.com/in/krishna-pahune
               </a>
               <a
@@ -116,14 +111,14 @@ function Contact() {
               />
             </div>
             <button type="submit" className="form-button">
-              Send via Gmail
-            </button>
-            *Requires Gmail login
+  Send Message
+</button>
+
           </form>
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default Contact
+export default Contact;
