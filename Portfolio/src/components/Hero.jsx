@@ -30,7 +30,7 @@ function Hero() {
               <ArrowRight size={20} />
             </button>
             <a
-              href="../public/resume.pdf"
+              href="/resume.pdf"
               download
               className="hero-button-secondary"
             >
