@@ -8,7 +8,7 @@ function Projects() {
       description: 'A personal portfolio website to showcase my projects and skills.',
       techStack: ['React', 'CSS', 'HTML', 'JavaScript'],
       githubUrl: 'https://github.com/KrishnaPahune/Projects/tree/2a6eec9a1013a32b529d3959799b6153dc0a20ba/Portfolio',
-      liveUrl: 'https://projects-zeta-liard.vercel.app/',
+      liveUrl: 'https://krishnapahune.vercel.app',
     },
     {
       title: 'Google Keep Clone',
