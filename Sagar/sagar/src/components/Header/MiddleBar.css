@@ -10,14 +10,13 @@ Move :root variables to global.css later
   --text-muted: #9ca3af;
   --bg-white: #ffffff;
   --bg-light: #f3f4f6;
-  --border-color: #e5e7eb;
+  --border-color: #FACD15;
 }
 
 /* Main Header */
 .middle-bar {
   background-color: var(--bg-white);
   padding: 0.65rem 0;
-  border-bottom: 1px solid var(--border-color);
 
   /* makes site feel instantly modern */
   position: sticky;
@@ -26,12 +25,12 @@ Move :root variables to global.css later
 }
 
 .middle-bar-container {
-  max-width: 1280px;
-  margin: 0 auto;
+  margin: 0 1rem;
   padding: 0 1rem;
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1.25rem;
 }
 
@@ -80,24 +79,19 @@ Move :root variables to global.css later
   color: var(--accent-color);
 }
 
-.logo-accent {
-  font-size: 0.9rem;
-  color: var(--text-light);
-  font-weight: 500;
-}
 
 /* Search Section — MOST IMPORTANT */
 
 .search-section {
   flex: 1;
-  max-width: 720px;
+  max-width: 800px;
 
   display: flex;
   align-items: center;
 
   background-color: var(--bg-light);
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
+  border: 2px solid var(--border-color);
+  border-radius: 2rem;
 
   overflow: hidden;
   transition: border-color 0.25s ease;
@@ -182,8 +176,8 @@ Move :root variables to global.css later
 
 .cart-badge {
   position: absolute;
-  top: -2px;
-  right: -4px;
+  top: 0px;
+  left: 1px;
 
   background-color: var(--accent-yellow);
   color: var(--text-dark);

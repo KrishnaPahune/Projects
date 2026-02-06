@@ -15,8 +15,7 @@ const MiddleBar = ({ onMenuToggle }) => {
             <span className="menu-icon">☰</span>
           </button>
           <a href="/" className="logo">
-            <span className="logo-text">Sagar</span>
-            <span className="logo-accent">Electronics</span>
+            <span className="logo-text">Sagar Electronics</span>
           </a>
         </div>
 
@@ -43,7 +42,7 @@ const MiddleBar = ({ onMenuToggle }) => {
           <a href="/cart" className="action-btn cart-button">
             <span className="action-icon">🛒</span>
             <span className="cart-badge">0</span>
-            <span className="cart-total">$ 0.00</span>
+            <span className="cart-total">0.00 Rs.</span>
           </a>
         </div>
       </div>

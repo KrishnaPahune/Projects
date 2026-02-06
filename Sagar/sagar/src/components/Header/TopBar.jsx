@@ -5,13 +5,15 @@ const TopBar = () => {
     <div className="top-bar">
       <div className="top-bar-container">
         <div className="top-bar-left">
-          <a href="tel:+919876543210" className="top-bar-link">
+          <a href="tel:+919822871709" className="top-bar-link">
             <span className="icon">📞</span>
-            <span>+91 98765 43210</span>
+            <span>+91 9822871709</span>
           </a>
           <a href="mailto:info@sagarelectronics.com" className="top-bar-link">
             <span className="icon">✉️</span>
-            <span>info@sagarelectronics.com</span>
+            <span>sagarelectronics4@gmail.com
+                
+            </span>
           </a>
         </div>
         <div className="top-bar-right">

@@ -20,7 +20,6 @@ Move :root variables to a global CSS file later (recommended)
   color: var(--text-dark);
   padding: 0.5rem 0;
   font-size: 0.875rem;
-  border-bottom: 1px solid var(--separator-color);
 }
 
 /* Show only on tablets & desktops */
@@ -31,8 +30,7 @@ Move :root variables to a global CSS file later (recommended)
   }
 
   .top-bar-container {
-    max-width: 1280px; /* more professional than 1400 */
-    margin: 0 auto;
+    margin: 0 ;
     padding: 0 1rem;
 
     display: flex;
