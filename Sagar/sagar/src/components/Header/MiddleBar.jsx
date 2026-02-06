@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './MiddleBar.css';
+import logo from '../../assets/images/sagar_logo.png'
 
 const MiddleBar = ({ onMenuToggle }) => {
   return (
@@ -15,7 +16,12 @@ const MiddleBar = ({ onMenuToggle }) => {
             <span className="menu-icon">☰</span>
           </button>
           <a href="/" className="logo">
-            <span className="logo-text">Sagar Electronics</span>
+            <span className='logo-text'>
+                <span className="logo-text-main">Sagar</span>
+                <span className="logo-text-sub">Electronics</span>
+            </span>
+            
+            <img src={logo} alt="Sagar Electronics Logo" className='logo-img' />
           </a>
         </div>
 
