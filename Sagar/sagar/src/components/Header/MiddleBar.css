@@ -279,15 +279,6 @@ Move :root variables to global.css later
 
 }
 
-/* Hide hamburger on desktop */
-
-@media (min-width: 1025px) {
-  .menu-toggle {
-    display: none;
-  }
-}
-
-/* Accessibility */
 
 @media (prefers-contrast: high) {
 

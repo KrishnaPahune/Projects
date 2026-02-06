@@ -20,7 +20,6 @@ const MiddleBar = ({ onMenuToggle }) => {
                 <span className="logo-text-main">Sagar</span>
                 <span className="logo-text-sub">Electronics</span>
             </span>
-            
             <img src={logo} alt="Sagar Electronics Logo" className='logo-img' />
           </a>
         </div>
