@@ -1,12 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './BottomBar.css';
 
 const BottomBar = () => {
-  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
-
-  const toggleCategories = () => {
-    setIsCategoriesOpen(!isCategoriesOpen);
-  };
 
   const categories = [
     { name: 'Laptops & Computers', icon: '💻', link: '/category/laptops' },
@@ -23,18 +18,10 @@ const BottomBar = () => {
   return (
     <nav className="bottom-bar">
       <div className="bottom-bar-container">
-        <button 
-          className="categories-toggle" 
-          onClick={toggleCategories}
-        >
-          <span className="categories-icon">☰</span>
-          <span>All Categories</span>
-        </button>
-        
-        <ul className={`categories-list ${isCategoriesOpen ? 'active' : ''}`}>
-          {categories.map((category, index) => (
-            <li 
-              key={index} 
+        <ul className="categories-list">
+          {categories.map((category) => (
+            <li
+              key={category.name}
               className={`category-item ${category.special ? 'super-deals' : ''}`}
             >
               <a href={category.link} className="category-link">

@@ -1,4 +1,9 @@
 /* TopBar Styles */
+
+/* NOTE:
+Move :root variables to a global CSS file later (recommended)
+*/
+
 :root {
   --primary-color: #91b8d4;
   --primary-light: #b8d4e8;
@@ -8,107 +13,69 @@
   --separator-color: #d1d5db;
 }
 
+/* MOBILE FIRST → Hidden by default */
 .top-bar {
+  display: none;
   background-color: #ffffff;
-  color: #1f2937;
+  color: var(--text-dark);
   padding: 0.5rem 0;
   font-size: 0.875rem;
+  border-bottom: 1px solid var(--separator-color);
 }
 
-.top-bar-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.top-bar-left,
-.top-bar-right {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  flex-wrap: wrap;
-}
-
-.top-bar-left {
-  gap: 1rem;
-}
-
-.top-bar-right {
-  gap: 0;
-}
-
-.top-bar-link {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  color: #6b7280;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  font-size: 0.875rem;
-  padding: 0.5rem 1rem;
-  position: relative;
-}
-
-.top-bar-left .top-bar-link {
-  padding: 0.25rem 0.5rem;
-}
-
-.top-bar-right .top-bar-link {
-  padding: 0.5rem 1.25rem;
-  border-right: 1px solid var(--separator-color);
-}
-
-.top-bar-right .top-bar-link:last-child {
-  border-right: none;
-}
-
-.top-bar-link:hover {
-  color: var(--accent-color);
-}
-
-.top-bar-link .icon {
-  font-size: 1rem;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
+/* Show only on tablets & desktops */
+@media (min-width: 769px) {
+  
   .top-bar {
-    font-size: 0.75rem;
+    display: block;
   }
 
   .top-bar-container {
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.5rem;
+    max-width: 1280px; /* more professional than 1400 */
+    margin: 0 auto;
+    padding: 0 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .top-bar-left,
   .top-bar-right {
-    gap: 0.5rem;
-    font-size: 0.75rem;
-    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+
+  .top-bar-left {
+    gap: 1rem;
   }
 
   .top-bar-right {
     gap: 0;
   }
 
-  .top-bar-link span:not(.icon) {
-    display: none;
-  }
-
   .top-bar-link {
-    padding: 0.5rem;
-    min-width: 44px;
-    min-height: 44px;
-    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.875rem;
+
+    padding: 0.5rem 1rem;
+    transition: color 0.25s ease;
   }
 
+  .top-bar-link:hover {
+    color: var(--accent-color);
+  }
+
+  .top-bar-link .icon {
+    font-size: 1rem;
+  }
+
+  /* separators */
   .top-bar-right .top-bar-link {
     border-right: 1px solid var(--separator-color);
   }
@@ -118,19 +85,20 @@
   }
 }
 
-/* Tablet */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .top-bar-link span:not(.icon) {
-    font-size: 0.8rem;
-  }
 
-  .top-bar-right .top-bar-link {
-    padding: 0.5rem 1rem;
+/* Tablet Fine Tuning */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .top-bar-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
   }
 }
 
+
 /* Accessibility */
 @media (prefers-contrast: high) {
+
   .top-bar {
     border-bottom: 2px solid var(--text-dark);
   }
@@ -140,7 +108,4 @@
     outline-offset: 2px;
   }
 
-  .top-bar-right .top-bar-link {
-    border-right: 2px solid var(--separator-color);
-  }
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TopBar from './TopBar';
 import MiddleBar from './MiddleBar';
 import BottomBar from './BottomBar';
+import './Header.css';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
