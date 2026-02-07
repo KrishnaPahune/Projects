@@ -1,24 +1,11 @@
-/* NOTE:
-Move :root variables to global.css later
-*/
+/* MiddleBar - Updated with Brand Theme */
 
-:root {
-  --accent-color: #2563eb;
-  --accent-yellow: #facc15; /* upgraded yellow */
-  --text-dark: #1f2937;
-  --text-light: #6b7280;
-  --text-muted: #9ca3af;
-  --bg-white: #ffffff;
-  --bg-light: #f3f4f6;
-  --border-color: #FACD15;
-}
-
-/* Main Header */
 .middle-bar {
-  background-color: var(--bg-white);
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.05) 0%, rgba(139, 92, 246, 0.05) 50%, rgba(59, 130, 246, 0.05) 100%);
   padding: 0.65rem 0;
-
-  /* makes site feel instantly modern */
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, #ec4899, #8b5cf6, #3b82f6, #fbbf24, #f97316) 1;
+  
   position: sticky;
   top: 0;
   z-index: 999;
@@ -27,7 +14,6 @@ Move :root variables to global.css later
 .middle-bar-container {
   margin: 0 1rem;
   padding: 0 1rem;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -35,7 +21,6 @@ Move :root variables to global.css later
 }
 
 /* Logo Section */
-
 .logo-section {
   display: flex;
   align-items: center;
@@ -43,27 +28,26 @@ Move :root variables to global.css later
 }
 
 .menu-toggle {
-  background: none;
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
   border: none;
   cursor: pointer;
   padding: 0.5rem;
-
   font-size: 1.5rem;
-  color: var(--text-dark);
-
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border-radius: 0.375rem;
-  transition: background-color 0.25s ease;
-
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
   min-width: 44px;
   min-height: 44px;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
 }
 
 .menu-toggle:hover {
-  background-color: var(--bg-light);
+  background: linear-gradient(135deg, #db2777, #7c3aed);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
 }
 
 .logo {
@@ -72,11 +56,18 @@ Move :root variables to global.css later
   font-weight: 700;
   line-height: 1.1;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .logo-img {
   width: 90px;
   height: auto;
+  filter: drop-shadow(0 2px 8px rgba(139, 92, 246, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
 }
 
 .logo-text {
@@ -84,37 +75,44 @@ Move :root variables to global.css later
   flex-direction: column;
   gap: 0.1rem;
 }
-.logo-text-main{
+
+.logo-text-main {
   font-size: 1.75rem;
-  color: var(--accent-color);
+  background: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
 }
 
 .logo-text-sub {
   font-size: 0.9rem;
-  color: black;
+  color: #6b7280;
   margin-top: -4px;
+  font-weight: 600;
 }
 
-
-/* Search Section — MOST IMPORTANT */
-
+/* Search Section */
 .search-section {
   flex: 1;
   max-width: 1500px;
-
   display: flex;
   align-items: center;
-
   background-color: white;
-  border: 2px solid #facc15;
+  border: 2px solid transparent;
   border-radius: 2rem;
-
   overflow: hidden;
-  transition: border-color 0.25s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);
+  background-image: linear-gradient(white, white), 
+                    linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6, #fbbf24);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
 }
 
 .search-section:focus-within {
-  border-color: var(--accent-color);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.25);
+  transform: translateY(-1px);
 }
 
 .search-input {
@@ -122,32 +120,35 @@ Move :root variables to global.css later
   padding: 0.7rem 1rem;
   border: none;
   background: transparent;
-
   font-size: 1rem;
   outline: none;
-  color: var(--text-dark);
+  color: #1f2937;
 }
 
 .search-input::placeholder {
-  color: var(--text-muted);
+  color: #9ca3af;
 }
 
 .search-button {
-  background-color: var(--accent-yellow);
+  background: linear-gradient(135deg, #fbbf24, #f97316);
   border: none;
-
   padding: 0.7rem 1.4rem;
   cursor: pointer;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  transition: background-color 0.25s ease;
+  transition: all 0.3s ease;
+  color: white;
+  font-weight: 600;
 }
 
 .search-button:hover {
-  background-color: #fbbf24;
+  background: linear-gradient(135deg, #f59e0b, #ea580c);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+}
+
+.search-button:active {
+  transform: scale(0.98);
 }
 
 .search-icon {
@@ -155,67 +156,74 @@ Move :root variables to global.css later
 }
 
 /* Actions Section */
-
 .actions-section {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .action-btn {
-  background: none;
-  border: none;
+  background: white;
+  border: 2px solid transparent;
   cursor: pointer;
-
-  padding: 0.45rem;
-  color: var(--text-dark);
-
+  padding: 0.5rem;
+  color: #4b5563;
   font-size: 1.4rem;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border-radius: 0.375rem;
-  transition: background-color 0.25s ease;
-
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
   text-decoration: none;
   position: relative;
-
   min-width: 44px;
   min-height: 44px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .action-btn:hover {
-  background-color: var(--bg-light);
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(139, 92, 246, 0.1));
+  border-color: #8b5cf6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.cart-button {
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
+  color: white;
+  border: none;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.cart-button:hover {
+  background: linear-gradient(135deg, #db2777, #7c3aed);
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
 }
 
 .cart-badge {
   position: absolute;
-  top: 0px;
-  left: 1px;
-
-  background-color: var(--accent-yellow);
-  color: var(--text-dark);
-
+  top: -4px;
+  right: -4px;
+  background: linear-gradient(135deg, #fbbf24, #f97316);
+  color: white;
   font-size: 0.7rem;
   font-weight: 700;
-
-  padding: 0.1rem 0.35rem;
+  padding: 0.2rem 0.4rem;
   border-radius: 9999px;
+  min-width: 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
 }
 
 .cart-total {
   font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-dark);
+  font-weight: 700;
+  color: white;
 }
 
 /* ================= MOBILE ================= */
-
-/* Mobile Responsive */
 @media (max-width: 768px) {
-
   .middle-bar {
     padding: 0.6rem 0;
   }
@@ -226,9 +234,20 @@ Move :root variables to global.css later
     padding: 0 0.75rem;
   }
 
-  /* Row 1 → Logo + Icons */
   .logo-section {
     flex: 1;
+  }
+
+  .logo-img {
+    width: 70px;
+  }
+
+  .logo-text-main {
+    font-size: 1.4rem;
+  }
+
+  .logo-text-sub {
+    font-size: 0.75rem;
   }
 
   .actions-section {
@@ -236,18 +255,13 @@ Move :root variables to global.css later
     gap: 0.5rem;
   }
 
-  /* ⭐ Row 2 → Search Bar */
   .search-section {
     order: 3;
     flex-basis: 100%;
     width: 100%;
     max-width: 100%;
-
     margin-top: 0.4rem;
-
-    /* Optional but makes it look premium */
     border-radius: 32px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
   }
 
   .search-input {
@@ -266,37 +280,47 @@ Move :root variables to global.css later
   .action-btn {
     padding: 0.375rem;
   }
+
+  .menu-toggle {
+    min-width: 40px;
+    min-height: 40px;
+  }
 }
 
-
 /* Tablet */
-
 @media (min-width: 769px) and (max-width: 1024px) {
-
   .search-section {
     max-width: 520px;
   }
 
+  .logo-img {
+    width: 80px;
+  }
 }
 
+/* Desktop Enhancement */
+@media (min-width: 1025px) {
+  .menu-toggle {
+    display: none;
+  }
+}
 
+/* Accessibility */
 @media (prefers-contrast: high) {
-
   .action-btn:focus,
   .search-button:focus,
   .menu-toggle:focus {
-    outline: 2px solid var(--accent-color);
+    outline: 3px solid #8b5cf6;
     outline-offset: 2px;
   }
-
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .action-btn,
   .search-button,
-  .menu-toggle {
+  .menu-toggle,
+  .logo-img {
     transition: none;
+    transform: none !important;
   }
-
 }

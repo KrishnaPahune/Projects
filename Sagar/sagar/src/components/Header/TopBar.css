@@ -1,23 +1,10 @@
-/* TopBar Styles */
+/* TopBar - Updated with Brand Theme */
 
-/* NOTE:
-Move :root variables to a global CSS file later (recommended)
-*/
-
-:root {
-  --primary-color: #91b8d4;
-  --primary-light: #b8d4e8;
-  --accent-color: #2563eb;
-  --text-dark: #1f2937;
-  --text-light: #6b7280;
-  --separator-color: #d1d5db;
-}
-
-/* MOBILE FIRST → Hidden by default */
+/* Hidden by default (Mobile First) */
 .top-bar {
   display: none;
-  background-color: #ffffff;
-  color: var(--text-dark);
+  background: linear-gradient(90deg, rgba(236, 72, 153, 0.03), rgba(139, 92, 246, 0.03), rgba(59, 130, 246, 0.03));
+  border-bottom: 1px solid rgba(139, 92, 246, 0.1);
   padding: 0.5rem 0;
   font-size: 0.875rem;
 }
@@ -30,9 +17,8 @@ Move :root variables to a global CSS file later (recommended)
   }
 
   .top-bar-container {
-    margin: 0 ;
+    margin: 0;
     padding: 0 1rem;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -56,54 +42,84 @@ Move :root variables to a global CSS file later (recommended)
     display: flex;
     align-items: center;
     gap: 0.375rem;
-
-    color: var(--text-light);
+    color: #6b7280;
     text-decoration: none;
     font-size: 0.875rem;
-
     padding: 0.5rem 1rem;
-    transition: color 0.25s ease;
+    transition: all 0.3s ease;
+    position: relative;
   }
 
   .top-bar-link:hover {
-    color: var(--accent-color);
+    color: #8b5cf6;
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.05), rgba(139, 92, 246, 0.05));
   }
 
   .top-bar-link .icon {
     font-size: 1rem;
+    transition: transform 0.3s ease;
   }
 
-  /* separators */
+  .top-bar-link:hover .icon {
+    transform: scale(1.1);
+  }
+
+  /* Gradient separators */
   .top-bar-right .top-bar-link {
-    border-right: 1px solid var(--separator-color);
+    border-right: 1px solid rgba(139, 92, 246, 0.15);
   }
 
   .top-bar-right .top-bar-link:last-child {
     border-right: none;
   }
-}
 
+  /* Add subtle gradient underline on hover */
+  .top-bar-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #ec4899, #8b5cf6);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+
+  .top-bar-link:hover::after {
+    width: 80%;
+  }
+}
 
 /* Tablet Fine Tuning */
 @media (min-width: 769px) and (max-width: 1024px) {
-
   .top-bar-link {
     padding: 0.5rem 0.75rem;
     font-size: 0.8rem;
   }
 }
 
-
 /* Accessibility */
 @media (prefers-contrast: high) {
-
   .top-bar {
-    border-bottom: 2px solid var(--text-dark);
+    border-bottom: 2px solid #8b5cf6;
   }
 
   .top-bar-link:focus {
-    outline: 2px solid var(--accent-color);
+    outline: 2px solid #8b5cf6;
     outline-offset: 2px;
   }
 
+  .top-bar-right .top-bar-link {
+    border-right: 2px solid #8b5cf6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-bar-link,
+  .top-bar-link .icon,
+  .top-bar-link::after {
+    transition: none;
+    transform: none !important;
+  }
 }

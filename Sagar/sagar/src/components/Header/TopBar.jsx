@@ -1,5 +1,6 @@
 import React from 'react';
 import './TopBar.css';
+
 const TopBar = () => {
   return (
     <div className="top-bar">
@@ -9,11 +10,9 @@ const TopBar = () => {
             <span className="icon">📞</span>
             <span>+91 9822871709</span>
           </a>
-          <a href="mailto:info@sagarelectronics.com" className="top-bar-link">
+          <a href="mailto:sagarelectronics4@gmail.com" className="top-bar-link">
             <span className="icon">✉️</span>
-            <span>sagarelectronics4@gmail.com
-                
-            </span>
+            <span>sagarelectronics4@gmail.com</span>
           </a>
         </div>
         <div className="top-bar-right">

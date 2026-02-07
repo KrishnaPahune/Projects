@@ -2,7 +2,6 @@ import React from 'react';
 import './BottomBar.css';
 
 const BottomBar = () => {
-
   const categories = [
     { name: 'Laptops & Computers', icon: '💻', link: '/category/laptops' },
     { name: 'Cameras', icon: '📷', link: '/category/cameras' },

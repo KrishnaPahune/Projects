@@ -1,0 +1,81 @@
+/* ================================================
+   SAGAR ELECTRONICS - GLOBAL THEME VARIABLES
+   Based on the brand logo gradient colors
+   ================================================ */
+
+:root {
+  /* Brand Colors from Logo */
+  --brand-pink: #ec4899;
+  --brand-purple: #8b5cf6;
+  --brand-blue: #3b82f6;
+  --brand-orange: #f97316;
+  --brand-yellow: #fbbf24;
+  --brand-red: #ef4444;
+  
+  /* Primary Gradient */
+  --gradient-primary: linear-gradient(135deg, #ec4899 0%, #8b5cf6 25%, #3b82f6 50%, #fbbf24 75%, #f97316 100%);
+  --gradient-hover: linear-gradient(135deg, #db2777 0%, #7c3aed 25%, #2563eb 50%, #f59e0b 75%, #ea580c 100%);
+  
+  /* Accent Colors */
+  --accent-primary: #8b5cf6;
+  --accent-secondary: #f97316;
+  --accent-highlight: #fbbf24;
+  
+  /* Text Colors */
+  --text-dark: #1f2937;
+  --text-medium: #4b5563;
+  --text-light: #6b7280;
+  --text-muted: #9ca3af;
+  
+  /* Background Colors */
+  --bg-white: #ffffff;
+  --bg-light: #f9fafb;
+  --bg-gray: #f3f4f6;
+  
+  /* Border & Separator */
+  --border-color: #e5e7eb;
+  --separator-color: #d1d5db;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+  
+  /* Glow Effects */
+  --glow-pink: 0 0 20px rgba(236, 72, 153, 0.3);
+  --glow-purple: 0 0 20px rgba(139, 92, 246, 0.3);
+  --glow-blue: 0 0 20px rgba(59, 130, 246, 0.3);
+  --glow-orange: 0 0 20px rgba(249, 115, 22, 0.3);
+}
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection Color */
+::selection {
+  background-color: var(--brand-purple);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--brand-purple);
+  color: white;
+}
