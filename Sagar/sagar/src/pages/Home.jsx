@@ -4,6 +4,10 @@ import Categories from '../components/Categories'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 import Hero from '../components/Hero'
+import FeaturedProducts from '../components/FeaturedProducts'
+import BrandShowcase from '../components/BrandShowcase'
+import SpecialDeals from '../components/SpecialDeals'
+import Newsletter from '../components/Newsletter'
 import Header from '../components/Header/Header'
 import Brands from '../components/Brands'
 
@@ -13,10 +17,10 @@ function Home() {
     <div>
       <Header />
       <Hero />
-      <Categories />
-      <Brands />
-      <About />   
-      <Contact />
+      <FeaturedProducts />
+      <BrandShowcase />
+      <SpecialDeals />
+      <Newsletter />
       <Footer />
     </div>
   )

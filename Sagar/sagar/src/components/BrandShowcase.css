@@ -1,0 +1,403 @@
+/* Brand Showcase Section - Premium & Minimal */
+
+.brand-showcase {
+  padding: 5rem 0;
+  background: white;
+}
+
+.brand-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ============================================
+   SECTION HEADER - Clean & Elegant
+   ============================================ */
+
+.brand-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.header-left {
+  flex: 1;
+}
+
+.brand-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+  font-size: 1.125rem;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.view-all-brands {
+  color: #1f2937;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.view-all-brands:hover {
+  border-color: #1f2937;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================
+   BRANDS GRID - Minimalist & Premium
+   ============================================ */
+
+.brands-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.brand-card {
+  background: white;
+  border: 1px solid #f3f4f6;
+  border-radius: 1rem;
+  padding: 2rem 1.5rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  min-height: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle gradient overlay on hover */
+.brand-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.02), rgba(236, 72, 153, 0.02));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.brand-card:hover::before {
+  opacity: 1;
+}
+
+.brand-card:hover {
+  border-color: #e5e7eb;
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================
+   BRAND LOGO - Clean Placeholder
+   ============================================ */
+
+.brand-logo-container {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.brand-logo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.brand-card:hover .brand-logo-placeholder {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+}
+
+.brand-name-text {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1f2937;
+  letter-spacing: -0.02em;
+}
+
+/* When you add actual logos, use this: */
+.brand-logo-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.brand-card:hover .brand-logo-img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* ============================================
+   BRAND INFO - Minimal Text
+   ============================================ */
+
+.brand-info {
+  position: relative;
+  z-index: 1;
+}
+
+.products-count {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.brand-card:hover .products-count {
+  color: #1f2937;
+}
+
+/* ============================================
+   BOTTOM CTA SECTION - Premium Call-to-Action
+   ============================================ */
+
+.brand-cta-section {
+  background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+  border: 1px solid #f3f4f6;
+  border-radius: 1.5rem;
+  padding: 3rem;
+  text-align: center;
+}
+
+.cta-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1f2937;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.cta-text {
+  font-size: 1.0625rem;
+  color: #6b7280;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  color: white;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cta-button:hover {
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Large Laptop */
+@media (max-width: 1280px) {
+  .brands-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Laptop */
+@media (max-width: 1024px) {
+  .brands-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+
+  .brand-card {
+    padding: 1.75rem 1.25rem;
+    min-height: 140px;
+  }
+
+  .brand-title {
+    font-size: 2rem;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .brand-showcase {
+    padding: 4rem 0;
+  }
+
+  .brand-container {
+    padding: 0 1rem;
+  }
+
+  .brand-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .view-all-brands {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .brands-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .brand-card {
+    padding: 1.5rem 1rem;
+    min-height: 120px;
+  }
+
+  .brand-logo-container {
+    height: 60px;
+  }
+
+  .brand-name-text {
+    font-size: 1.125rem;
+  }
+
+  .brand-title {
+    font-size: 1.75rem;
+  }
+
+  .brand-subtitle {
+    font-size: 1rem;
+  }
+
+  .brand-cta-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .cta-title {
+    font-size: 1.5rem;
+  }
+
+  .cta-text {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .brand-showcase {
+    padding: 3rem 0;
+  }
+
+  .brands-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .brand-card {
+    padding: 1.25rem 0.875rem;
+    min-height: 110px;
+  }
+
+  .brand-logo-container {
+    height: 50px;
+  }
+
+  .brand-name-text {
+    font-size: 1rem;
+  }
+
+  .products-count {
+    font-size: 0.8125rem;
+  }
+
+  .brand-title {
+    font-size: 1.5rem;
+  }
+
+  .cta-title {
+    font-size: 1.25rem;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-card,
+  .view-all-brands,
+  .cta-button,
+  .brand-logo-placeholder,
+  .brand-logo-img {
+    transition: none;
+    transform: none !important;
+  }
+
+  .brand-card::before {
+    transition: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .brand-card {
+    border: 2px solid #1f2937;
+  }
+
+  .brand-cta-section {
+    border: 2px solid #1f2937;
+  }
+}
+
+/* Touch Devices */
+@media (hover: none) and (pointer: coarse) {
+  .brand-card {
+    min-height: 130px;
+  }
+
+  .cta-button,
+  .view-all-brands {
+    min-height: 48px;
+  }
+}

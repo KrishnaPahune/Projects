@@ -39,7 +39,7 @@ const MiddleBar = ({ onMenuToggle }) => {
         {/* Action Icons */}
         <div className="actions-section">
           <button className="action-btn" aria-label="Compare">
-            <span className="action-icon">⚖️</span>
+            <span className="action-icon">⇄</span>
           </button>
           <button className="action-btn" aria-label="Wishlist">
             <span className="action-icon">❤️</span>

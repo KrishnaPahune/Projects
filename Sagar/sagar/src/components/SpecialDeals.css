@@ -1,0 +1,515 @@
+/* Special Deals Section - Premium with Urgency */
+
+.special-deals {
+  padding: 5rem 0;
+  background: linear-gradient(180deg, #fafbfc 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background pattern */
+.special-deals::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.03) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.deals-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   SECTION HEADER - With Countdown
+   ============================================ */
+
+.deals-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.header-content {
+  flex: 1;
+}
+
+.deals-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: #92400e;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.deals-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.deals-subtitle {
+  font-size: 1.125rem;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+/* ============================================
+   COUNTDOWN TIMER - Premium & Clear
+   ============================================ */
+
+.countdown-timer {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.timer-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.timer-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.time-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  min-width: 70px;
+}
+
+.time-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1f2937;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.time-label {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 600;
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.time-separator {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #9ca3af;
+}
+
+/* ============================================
+   DEALS GRID
+   ============================================ */
+
+.deals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* ============================================
+   DEAL CARD - Premium with Urgency Elements
+   ============================================ */
+
+.deal-card {
+  background: white;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid #f3f4f6;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.deal-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-color: #e5e7eb;
+}
+
+.deal-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: white;
+  color: #1f2937;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   DEAL IMAGE - With Discount Badge
+   ============================================ */
+
+.deal-image {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.deal-title-text {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1f2937;
+  text-align: center;
+}
+
+/* Discount Circle */
+.discount-circle {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+  color: white;
+}
+
+.discount-number {
+  font-size: 1.75rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.discount-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-top: 0.125rem;
+}
+
+/* ============================================
+   DEAL INFO
+   ============================================ */
+
+.deal-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.deal-product-name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+/* Pricing */
+.deal-pricing {
+  margin-bottom: 1rem;
+}
+
+.price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.375rem;
+}
+
+.deal-price {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #1f2937;
+  letter-spacing: -0.02em;
+}
+
+.original-price-deal {
+  font-size: 1.125rem;
+  color: #9ca3af;
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.savings {
+  font-size: 0.875rem;
+  color: #059669;
+  font-weight: 700;
+}
+
+/* ============================================
+   STOCK INDICATOR - Creates Urgency
+   ============================================ */
+
+.stock-indicator {
+  margin-bottom: 1.5rem;
+}
+
+.stock-bar {
+  width: 100%;
+  height: 6px;
+  background: #f3f4f6;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.stock-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ef4444 0%, #f97316 100%);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.stock-text {
+  font-size: 0.8125rem;
+  color: #ef4444;
+  font-weight: 700;
+}
+
+/* ============================================
+   CLAIM DEAL BUTTON - Bold CTA
+   ============================================ */
+
+.claim-deal-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  margin-top: auto;
+}
+
+.claim-deal-btn:hover {
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+}
+
+.btn-arrow {
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.claim-deal-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ============================================
+   VIEW ALL BUTTON
+   ============================================ */
+
+.view-all-deals-container {
+  display: flex;
+  justify-content: center;
+}
+
+.view-all-deals-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 2.5rem;
+  background: white;
+  color: #1f2937;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.view-all-deals-btn:hover {
+  border-color: #1f2937;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Laptop */
+@media (max-width: 1024px) {
+  .deals-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .deals-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .countdown-timer {
+    width: 100%;
+  }
+
+  .timer-display {
+    justify-content: center;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .special-deals {
+    padding: 4rem 0;
+  }
+
+  .deals-container {
+    padding: 0 1rem;
+  }
+
+  .deals-title {
+    font-size: 2rem;
+  }
+
+  .deals-subtitle {
+    font-size: 1rem;
+  }
+
+  .deals-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .time-unit {
+    min-width: 60px;
+    padding: 0.625rem 0.75rem;
+  }
+
+  .time-number {
+    font-size: 1.75rem;
+  }
+
+  .discount-circle {
+    width: 70px;
+    height: 70px;
+  }
+
+  .discount-number {
+    font-size: 1.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .special-deals {
+    padding: 3rem 0;
+  }
+
+  .deals-title {
+    font-size: 1.75rem;
+  }
+
+  .countdown-timer {
+    padding: 1rem;
+  }
+
+  .timer-display {
+    gap: 0.375rem;
+  }
+
+  .time-unit {
+    min-width: 55px;
+    padding: 0.5rem 0.625rem;
+  }
+
+  .time-number {
+    font-size: 1.5rem;
+  }
+
+  .time-separator {
+    font-size: 1.25rem;
+  }
+
+  .deal-price {
+    font-size: 1.5rem;
+  }
+
+  .original-price-deal {
+    font-size: 1rem;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .deal-card,
+  .claim-deal-btn,
+  .view-all-deals-btn,
+  .stock-fill,
+  .btn-arrow {
+    transition: none;
+    transform: none !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .deal-card {
+    border: 2px solid #1f2937;
+  }
+
+  .countdown-timer {
+    border: 2px solid #1f2937;
+  }
+}
