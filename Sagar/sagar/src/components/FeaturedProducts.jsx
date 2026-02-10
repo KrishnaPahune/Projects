@@ -1,108 +1,115 @@
-import React, { useState } from 'react';
-import './FeaturedProducts.css';
-
+import React, { useState } from "react";
+import "./FeaturedProducts.css";
+import tv1 from "../assets/images/LGOLed55.jpg";
+import tv2 from "../assets/images/tv2.avif";
+import tv3 from "../assets/images/tv3.jpeg";
+import fridge1 from "../assets/images/fridge1.png";
+import fridge2 from "../assets/images/fridge2.jpg";
+import wm1 from "../assets/images/wm1.jpg";
+import wm2 from "../assets/images/wm2.webp";
+import ac1 from "../assets/images/ac1.webp";
 const FeaturedProducts = () => {
-  const [activeTab, setActiveTab] = useState('trending');
+  const [activeTab, setActiveTab] = useState("trending");
 
   // Sample product data - replace with actual data from your API/database
   const products = {
     trending: [
       {
         id: 1,
-        name: 'iPhone 15 Pro Max',
-        category: 'Smartphones',
-        price: 134900,
-        originalPrice: 159900,
-        image: '/products/iphone-15.jpg',
+        name: "LG OLED55C2 Smart TV",
+        category: "Smart TVs",
+        price: 119900,
+        originalPrice: 149900,
+        image: tv1,
         rating: 4.8,
-        reviews: 234,
-        badge: 'Trending',
-        inStock: true
+        reviews: 145,
+        badge: "Trending",
+        inStock: true,
       },
       {
         id: 2,
-        name: 'Samsung Galaxy S24 Ultra',
-        category: 'Smartphones',
-        price: 129999,
-        originalPrice: 144999,
-        image: '/products/samsung-s24.jpg',
+        name: 'Samsung QLED 65" QN90B',
+        category: "Smart TVs",
+        price: 159900,
+        originalPrice: 189900,
+        image: tv2,
         rating: 4.7,
-        reviews: 189,
-        badge: 'Hot',
-        inStock: true
+        reviews: 98,
+        badge: "Hot",
+        inStock: true,
       },
       {
         id: 3,
-        name: 'MacBook Air M3',
-        category: 'Laptops',
-        price: 114900,
-        originalPrice: 124900,
-        image: '/products/macbook-air.jpg',
-        rating: 4.9,
-        reviews: 456,
-        badge: 'Popular',
-        inStock: true
+        name: "Sony Bravia 55X90J",
+        category: "Smart TVs",
+        price: 99900,
+        originalPrice: 119900,
+        image: tv3,
+        rating: 4.6,
+        reviews: 76,
+        badge: "Popular",
+        inStock: true,
       },
       {
         id: 4,
-        name: 'Sony WH-1000XM5',
-        category: 'Headphones',
-        price: 29990,
-        originalPrice: 34990,
-        image: '/products/sony-headphones.jpg',
-        rating: 4.8,
-        reviews: 312,
-        badge: 'Best Seller',
-        inStock: true
+        name: "Whirlpool 285L Neo Frost Refrigerator",
+        category: "Refrigerators",
+        price: 36990,
+        originalPrice: 41990,
+        image: fridge1,
+        rating: 4.5,
+        reviews: 210,
+        badge: "Best Seller",
+        inStock: true,
       },
       {
         id: 5,
-        name: 'iPad Pro 12.9"',
-        category: 'Tablets',
-        price: 109900,
-        originalPrice: 119900,
-        image: '/products/ipad-pro.jpg',
-        rating: 4.7,
-        reviews: 167,
+        name: "LG 260L Frost-Free Refrigerator",
+        category: "Refrigerators",
+        price: 34990,
+        originalPrice: 39990,
+        image: fridge2,
+        rating: 4.4,
+        reviews: 134,
         badge: null,
-        inStock: true
+        inStock: true,
       },
       {
         id: 6,
-        name: 'Dell XPS 15',
-        category: 'Laptops',
-        price: 154900,
-        originalPrice: 174900,
-        image: '/products/dell-xps.jpg',
+        name: "IFB 8kg Front Load Washing Machine",
+        category: "Washing Machines",
+        price: 27990,
+        originalPrice: 32990,
+        image: wm1,
         rating: 4.6,
         reviews: 98,
-        badge: null,
-        inStock: true
+        badge: "New",
+        inStock: true,
       },
       {
         id: 7,
-        name: 'Canon EOS R6 Mark II',
-        category: 'Cameras',
-        price: 239900,
-        originalPrice: 259900,
-        image: '/products/canon-r6.jpg',
-        rating: 4.9,
-        reviews: 87,
-        badge: 'New',
-        inStock: true
+        name: "Samsung 7.5kg Fully-Automatic Washing Machine",
+        category: "Washing Machines",
+        price: 19990,
+        originalPrice: 24990,
+        image: wm2,
+        rating: 4.3,
+        reviews: 64,
+        badge: null,
+        inStock: true,
       },
       {
         id: 8,
-        name: 'Apple Watch Series 9',
-        category: 'Wearables',
-        price: 41900,
-        originalPrice: 45900,
-        image: '/products/apple-watch.jpg',
-        rating: 4.8,
-        reviews: 201,
-        badge: null,
-        inStock: true
-      }
+        name: "Daikin 1.5 Ton Inverter AC",
+        category: "Air Conditioners",
+        price: 39990,
+        originalPrice: 44990,
+        image: ac1,
+        rating: 4.7,
+        reviews: 187,
+        badge: "Energy Saver",
+        inStock: true,
+      },
     ],
     newArrivals: [
       // You can add different products for new arrivals
@@ -110,7 +117,7 @@ const FeaturedProducts = () => {
     ],
     deals: [
       // Products with best discounts
-    ]
+    ],
   };
 
   const calculateDiscount = (original, current) => {
@@ -118,10 +125,10 @@ const FeaturedProducts = () => {
   };
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
-      maximumFractionDigits: 0
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0,
     }).format(price);
   };
 
@@ -134,26 +141,28 @@ const FeaturedProducts = () => {
         <div className="featured-header">
           <div className="header-content">
             <h2 className="section-title">Featured Products</h2>
-            <p className="section-subtitle">Handpicked collection of premium electronics</p>
+            <p className="section-subtitle">
+              Handpicked collection of premium electronics
+            </p>
           </div>
-          
+
           {/* Tab Navigation */}
           <div className="tab-navigation">
-            <button 
-              className={`tab-btn ${activeTab === 'trending' ? 'active' : ''}`}
-              onClick={() => setActiveTab('trending')}
+            <button
+              className={`tab-btn ${activeTab === "trending" ? "active" : ""}`}
+              onClick={() => setActiveTab("trending")}
             >
               🔥 Trending
             </button>
-            <button 
-              className={`tab-btn ${activeTab === 'newArrivals' ? 'active' : ''}`}
-              onClick={() => setActiveTab('newArrivals')}
+            <button
+              className={`tab-btn ${activeTab === "newArrivals" ? "active" : ""}`}
+              onClick={() => setActiveTab("newArrivals")}
             >
               ✨ New Arrivals
             </button>
-            <button 
-              className={`tab-btn ${activeTab === 'deals' ? 'active' : ''}`}
-              onClick={() => setActiveTab('deals')}
+            <button
+              className={`tab-btn ${activeTab === "deals" ? "active" : ""}`}
+              onClick={() => setActiveTab("deals")}
             >
               💰 Best Deals
             </button>
@@ -172,12 +181,13 @@ const FeaturedProducts = () => {
               {/* Product Image */}
               <div className="product-image-container">
                 <div className="product-image">
-                  {/* Placeholder with gradient - replace with actual image */}
-                  <div className="image-placeholder">
-                    <span className="placeholder-text">{product.name}</span>
-                  </div>
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="product-img"
+                  />
                 </div>
-                
+
                 {/* Quick Actions */}
                 <div className="product-actions">
                   <button className="action-icon" aria-label="Add to wishlist">
@@ -193,11 +203,11 @@ const FeaturedProducts = () => {
               <div className="product-info">
                 <span className="product-category">{product.category}</span>
                 <h3 className="product-name">{product.name}</h3>
-                
+
                 {/* Rating */}
                 <div className="product-rating">
                   <div className="stars">
-                    {'⭐'.repeat(Math.floor(product.rating))}
+                    {"⭐".repeat(Math.floor(product.rating))}
                   </div>
                   <span className="rating-text">
                     {product.rating} ({product.reviews} reviews)
@@ -207,14 +217,19 @@ const FeaturedProducts = () => {
                 {/* Price */}
                 <div className="product-pricing">
                   <div className="price-row">
-                    <span className="current-price">{formatPrice(product.price)}</span>
+                    <span className="current-price">
+                      {formatPrice(product.price)}
+                    </span>
                     {product.originalPrice > product.price && (
-                      <span className="original-price">{formatPrice(product.originalPrice)}</span>
+                      <span className="original-price">
+                        {formatPrice(product.originalPrice)}
+                      </span>
                     )}
                   </div>
                   {product.originalPrice > product.price && (
                     <span className="discount-badge">
-                      {calculateDiscount(product.originalPrice, product.price)}% OFF
+                      {calculateDiscount(product.originalPrice, product.price)}%
+                      OFF
                     </span>
                   )}
                 </div>

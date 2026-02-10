@@ -3,14 +3,13 @@ import './BottomBar.css';
 
 const BottomBar = () => {
   const categories = [
-    { name: 'Laptops & Computers', icon: '💻', link: '/category/laptops' },
-    { name: 'Cameras', icon: '📷', link: '/category/cameras' },
-    { name: 'Smartphones', icon: '📱', link: '/category/smartphones' },
-    { name: 'Gaming', icon: '🎮', link: '/category/gaming' },
-    { name: 'TV & Audio', icon: '📺', link: '/category/tv-audio' },
-    { name: 'Headphones', icon: '🎧', link: '/category/headphones' },
-    { name: 'Drones', icon: '🚁', link: '/category/drones' },
-    { name: 'Gadgets', icon: '⌚', link: '/category/gadgets' },
+    { name: 'Smart TVs', icon: '😎', link: '/category/smart-tvs' },
+    { name: 'Refrigerators', icon: '🧊', link: '/category/refrigerators' },
+    { name: 'Washing Machines', icon: '🧺', link: '/category/washing-machines' },
+    { name: 'Air Conditioners', icon: '❄️', link: '/category/air-conditioners' },
+    { name: 'Kitchen Appliances', icon: '♨️', link: '/category/kitchen-appliances' },
+    { name: 'Home Appliances', icon: '🏠', link: '/category/home-appliances' },
+    { name: 'Light Fittings', icon: '🔌', link: '/brands' },
     { name: 'SuperDeals', icon: '🔥', link: '/category/super-deals', special: true }
   ];
 
