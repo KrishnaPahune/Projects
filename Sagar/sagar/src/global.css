@@ -135,6 +135,7 @@ html {
   scroll-behavior: smooth;
 }
 
+
 /* Selection Color */
 ::selection{
   background: var(--brand-purple);

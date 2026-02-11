@@ -8,7 +8,7 @@ import fridge2 from "../assets/images/fridge2.jpg";
 import wm1 from "../assets/images/wm1.jpg";
 import wm2 from "../assets/images/wm2.webp";
 import ac1 from "../assets/images/ac1.webp";
-const FeaturedProducts = () => {
+const FeaturedProducts = ({ goToListing, goHome }) => {
   const [activeTab, setActiveTab] = useState("trending");
 
   // Sample product data - replace with actual data from your API/database
@@ -246,7 +246,7 @@ const FeaturedProducts = () => {
 
         {/* View All Button */}
         <div className="view-all-container">
-          <a href="/products" className="view-all-btn">
+          <a className="view-all-btn" onClick={goToListing}>
             <span>View All Products</span>
             <span className="arrow">→</span>
           </a>

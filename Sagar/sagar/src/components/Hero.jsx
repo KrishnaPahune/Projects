@@ -3,7 +3,7 @@ import "./Hero.css";
 import heroImgElectronics from "../assets/images/electronic-home-appliances.png";
 import heroImgFittings from "../assets/images/electronic-fitting-essentials.png";
 import heroImgNewArrivals from "../assets/images/new-arrivals.png";
-const Hero = () => {
+const Hero = ({ goToListing, goHome }) => {
   const slides = [
     {
       id: 1,
@@ -76,13 +76,13 @@ const Hero = () => {
               <p>{slide.description}</p>
 
               <div className="hero-buttons">
-                <a href={slide.ctaLink} className="btn-primary">
+                <button className="btn-primary" onClick={goToListing}>
                   {slide.cta}
-                </a>
+                </button>
 
-                <a href="/products" className="btn-secondary">
+                <button className="btn-secondary" onClick={goToListing}>
                   Browse All
-                </a>
+                </button>
               </div>
             </div>
           </div>
