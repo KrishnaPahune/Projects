@@ -8,7 +8,7 @@ import fridge2 from "../assets/images/fridge2.jpg";
 import wm1 from "../assets/images/wm1.jpg";
 import wm2 from "../assets/images/wm2.webp";
 import ac1 from "../assets/images/ac1.webp";
-const FeaturedProducts = ({ goToListing, goHome }) => {
+const FeaturedProducts = ({ goToListing, goHome, openProduct }) => {
   const [activeTab, setActiveTab] = useState("trending");
 
   // Sample product data - replace with actual data from your API/database
@@ -172,7 +172,11 @@ const FeaturedProducts = ({ goToListing, goHome }) => {
         {/* Products Grid */}
         <div className="products-grid">
           {currentProducts.map((product) => (
-            <div key={product.id} className="product-card">
+            <div
+              key={product.id}
+              className="product-card"
+              onClick={() => openProduct(product)}
+            >
               {/* Product Badge */}
               {product.badge && (
                 <div className="product-badge">{product.badge}</div>
@@ -235,7 +239,13 @@ const FeaturedProducts = ({ goToListing, goHome }) => {
                 </div>
 
                 {/* Add to Cart */}
-                <button className="add-to-cart-btn">
+                <button
+                  className="add-to-cart-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    addToCart(product);
+                  }}
+                >
                   <span className="cart-icon">🛒</span>
                   <span>Add to Cart</span>
                 </button>

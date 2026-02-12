@@ -65,13 +65,14 @@ const getProducts = () => {
   });
 };
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, openProduct }) => {
   const discount = Math.round(
     ((product.originalPrice - product.price) / product.originalPrice) * 100,
   );
 
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={() => openProduct(product)}>
+      
       <div className="product-image-wrapper">
         <img src={product.image} alt={product.name} />
       </div>
@@ -103,7 +104,7 @@ const SkeletonCard = () => (
   </div>
 );
 
-export default function ProductListing({ goHome }) {
+export default function ProductListing({ goHome, openProduct }) {
   const [showFilters, setShowFilters] = useState(false);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -180,7 +181,7 @@ export default function ProductListing({ goHome }) {
                     <SkeletonCard key={i} />
                   ))
                 : products.map((product) => (
-                    <ProductCard key={product.id} product={product} />
+                    <ProductCard key={product.id} product={product} openProduct={openProduct}/>
                   ))}
             </div>
           </div>

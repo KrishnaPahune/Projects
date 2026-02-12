@@ -3,7 +3,7 @@ import "./SpecialDeals.css";
 import tv1 from "../assets/images/LGOLed55.jpg";
 import fridge1 from "../assets/images/fridge1.png";
 import wm1 from "../assets/images/wm1.jpg";
-const SpecialDeals = () => {
+const SpecialDeals = ({ goToListing, goHome, openProduct }) => {
   // Countdown timer for limited offer
   const [timeLeft, setTimeLeft] = useState({
     hours: 23,
@@ -126,12 +126,29 @@ const SpecialDeals = () => {
         {/* Deals Grid */}
         <div className="deals-grid">
           {deals.map((deal) => (
-            <div key={deal.id} className="deal-card">
+            <div
+              key={deal.id}
+              className="deal-card"
+              onClick={() =>
+                openProduct({
+                  id: deal.id,
+                  name: deal.product,
+                  price: deal.dealPrice,
+                  originalPrice: deal.originalPrice,
+                  image: deal.image,
+                  brand: "LG", // optional for now
+                })
+              }
+            >
               <div className="deal-badge">{deal.badge}</div>
 
               {/* Deal Image */}
               <div className="deal-image">
-                <img src={deal.image} alt={deal.product} className="brand-logo" />
+                <img
+                  src={deal.image}
+                  alt={deal.product}
+                  className="brand-logo"
+                />
                 <div className="discount-circle">
                   <span className="discount-number">{deal.discount}%</span>
                   <span className="discount-text">OFF</span>
@@ -170,7 +187,13 @@ const SpecialDeals = () => {
                 </div>
 
                 {/* CTA Button */}
-                <button className="claim-deal-btn">
+                <button
+                  className="claim-deal-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    addToCart(deal);
+                  }}
+                >
                   <span>Claim Deal</span>
                   <span className="btn-arrow">→</span>
                 </button>
