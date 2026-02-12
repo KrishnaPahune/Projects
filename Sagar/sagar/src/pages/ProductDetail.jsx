@@ -1,7 +1,8 @@
 import "./ProductDetail.css";
 import { useEffect } from "react";
-
+import { useCart } from "../context/CartContext";
 export default function ProductDetail({ product, goBack }) {
+  const { addToCart } = useCart();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -49,7 +50,9 @@ export default function ProductDetail({ product, goBack }) {
 
             {/* CTA */}
             <div className="pd-actions">
-              <button className="btn-add">Add to Cart</button>
+              <button className="btn-add" onClick={() => addToCart(product)}>
+                {console.log(product)}
+                Add to Cart</button>
 
               <button className="btn-buy">Buy Now</button>
             </div>

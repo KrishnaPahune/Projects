@@ -8,8 +8,11 @@ import fridge2 from "../assets/images/fridge2.jpg";
 import wm1 from "../assets/images/wm1.jpg";
 import wm2 from "../assets/images/wm2.webp";
 import ac1 from "../assets/images/ac1.webp";
+import { useCart } from "../context/CartContext";
+
 const FeaturedProducts = ({ goToListing, goHome, openProduct }) => {
   const [activeTab, setActiveTab] = useState("trending");
+  const { addToCart } = useCart();
 
   // Sample product data - replace with actual data from your API/database
   const products = {

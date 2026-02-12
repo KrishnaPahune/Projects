@@ -3,8 +3,11 @@ import TopBar from './TopBar';
 import MiddleBar from './MiddleBar';
 import BottomBar from './BottomBar';
 import './Header.css';
+import { useCart } from "../../context/CartContext";
 
 const Header = () => {
+  const { cartCount } = useCart();
+  console.log(cartCount);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {

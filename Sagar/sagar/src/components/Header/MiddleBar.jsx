@@ -1,15 +1,26 @@
-import React from 'react';
-import './MiddleBar.css';
-import logo from '../../assets/images/sagar_logo.png';
+import React from "react";
+import "./MiddleBar.css";
+import logo from "../../assets/images/sagar_logo.png";
+import { useCart } from "../../context/CartContext";
 
 const MiddleBar = ({ onMenuToggle }) => {
+  const { cartItems } = useCart();
+  const totalPrice = cartItems.reduce(
+    (total, item) =>
+      total + (Number(item.price) || 0) * (Number(item.qty) || 0),
+    0,
+  );
+  const totalItems = cartItems.reduce(
+    (sum, item) => sum + (Number(item.qty) || 0),
+    0,
+  );
   return (
     <div className="middle-bar">
       <div className="middle-bar-container">
         {/* Logo & Menu */}
         <div className="logo-section">
-          <button 
-            className="menu-toggle" 
+          <button
+            className="menu-toggle"
             onClick={onMenuToggle}
             aria-label="Toggle menu"
           >
@@ -26,9 +37,9 @@ const MiddleBar = ({ onMenuToggle }) => {
 
         {/* Search Bar */}
         <div className="search-section">
-          <input 
-            type="text" 
-            className="search-input" 
+          <input
+            type="text"
+            className="search-input"
             placeholder="Search products..."
           />
           <button className="search-button" aria-label="Search">
@@ -46,8 +57,16 @@ const MiddleBar = ({ onMenuToggle }) => {
           </button>
           <a href="/cart" className="action-btn cart-button">
             <span className="action-icon">🛒</span>
-            <span className="cart-badge">0</span>
-            <span className="cart-total">₹ 0.00</span>
+
+            {cartItems.length > 0 && (
+              <span className="cart-badge">{totalItems}</span>
+            )}
+
+            {cartItems.length > 0 && (
+              <span className="cart-total">
+                ₹ {totalPrice.toLocaleString("en-IN")}
+              </span>
+            )}
           </a>
         </div>
       </div>
