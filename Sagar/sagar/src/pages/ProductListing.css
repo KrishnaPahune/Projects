@@ -163,6 +163,11 @@
   box-shadow:var(--shadow-lg);
   border-color:transparent;
 }
+.add-to-cart-btn{
+  width: 64%;
+  align-self: center;
+  padding: 0.500rem;
+}
 
 
 /* 🔥 Premium gradient hover edge */

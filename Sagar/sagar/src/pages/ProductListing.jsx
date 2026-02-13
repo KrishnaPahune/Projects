@@ -72,7 +72,6 @@ const ProductCard = ({ product, openProduct }) => {
 
   return (
     <div className="product-card" onClick={() => openProduct(product)}>
-      
       <div className="product-image-wrapper">
         <img src={product.image} alt={product.name} />
       </div>
@@ -88,6 +87,16 @@ const ProductCard = ({ product, openProduct }) => {
           </span>
           <span className="discount">{discount}% off</span>
         </div>
+        <button
+          className="add-to-cart-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            addToCart(product);
+          }}
+        >
+          <span className="cart-icon">🛒</span>
+          <span>Add to Cart</span>
+        </button>
       </div>
     </div>
   );
@@ -181,7 +190,11 @@ export default function ProductListing({ goHome, openProduct }) {
                     <SkeletonCard key={i} />
                   ))
                 : products.map((product) => (
-                    <ProductCard key={product.id} product={product} openProduct={openProduct}/>
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      openProduct={openProduct}
+                    />
                   ))}
             </div>
           </div>
