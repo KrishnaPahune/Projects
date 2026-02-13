@@ -151,40 +151,43 @@ export default function ProductListing({ goHome, openProduct, goToCart, product 
           </button>
 
           <h1>Explore Premium Electronics</h1>
+          
+          <div className="header-actions">
+            <select className="sort-dropdown">
+              <option>Sort by: Popularity</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Newest</option>
+            </select>
 
-          <button
-            className="action-btn cart-button"
-            onClick={(e) => {
-                    e.stopPropagation();
-                    goToCart();
-                  }}
-          >
-            🛒
+            <button
+              className="filter-btn"
+              onClick={() => setShowFilters(true)}
+            >
+              Filters
+            </button>
 
-            {cartCount > 0 && (
-              <span className="cart-badge">{cartCount}</span>
-            )}
+            <button
+              className="action-btn cart-button"
+              onClick={(e) => {
+                      e.stopPropagation();
+                      goToCart();
+                    }}
+            >
+               <span className="action-icon">🛒</span>
 
-            {cartCount > 0 && (
-              <span className="cart-total">
-                ₹ {cartTotal.toLocaleString("en-IN")}
-              </span>
-            )}
-          </button>
 
-          <button
-            className="filter-btn"
-            onClick={() => setShowFilters(true)}
-          >
-            Filters
-          </button>
+              {cartCount > 0 && (
+                <span className="cart-badge">{cartCount}</span>
+              )}
 
-          <select className="sort-dropdown">
-            <option>Sort by: Popularity</option>
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
-            <option>Newest</option>
-          </select>
+              {cartCount > 0 && (
+                <span className="cart-total">
+                  ₹ {cartTotal.toLocaleString("en-IN")}
+                </span>
+              )}
+            </button>
+          </div>
         </div>
 
         {/* LAYOUT */}
