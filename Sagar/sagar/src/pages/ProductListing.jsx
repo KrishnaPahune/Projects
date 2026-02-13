@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ProductListing.css";
+import { useCart } from "../context/CartContext";
 
 // Fake API simulation
 const getProducts = () => {
@@ -65,13 +66,19 @@ const getProducts = () => {
   });
 };
 
+//////////////////////////////////////////////////////////////
+
 const ProductCard = ({ product, openProduct }) => {
+
+  const { addToCart } = useCart(); // ✅ GET FROM CONTEXT
+
   const discount = Math.round(
     ((product.originalPrice - product.price) / product.originalPrice) * 100,
   );
 
   return (
     <div className="product-card" onClick={() => openProduct(product)}>
+      
       <div className="product-image-wrapper">
         <img src={product.image} alt={product.name} />
       </div>
@@ -87,20 +94,24 @@ const ProductCard = ({ product, openProduct }) => {
           </span>
           <span className="discount">{discount}% off</span>
         </div>
+
         <button
           className="add-to-cart-btn"
           onClick={(e) => {
-            e.stopPropagation();
+            e.stopPropagation(); // prevents opening product page
             addToCart(product);
+            console.log("Button clicked")
           }}
         >
-          <span className="cart-icon">🛒</span>
-          <span>Add to Cart</span>
+          🛒 Add to Cart
         </button>
+
       </div>
     </div>
   );
 };
+
+//////////////////////////////////////////////////////////////
 
 const SkeletonCard = () => (
   <div className="skeleton-card">
@@ -113,10 +124,15 @@ const SkeletonCard = () => (
   </div>
 );
 
-export default function ProductListing({ goHome, openProduct }) {
+//////////////////////////////////////////////////////////////
+
+export default function ProductListing({ goHome, openProduct, goToCart, product }) {
   const [showFilters, setShowFilters] = useState(false);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // ✅ SINGLE useCart call
+  const { cartItems, cartCount, cartTotal, addToCart } = useCart();
 
   useEffect(() => {
     getProducts().then((data) => {
@@ -128,14 +144,40 @@ export default function ProductListing({ goHome, openProduct }) {
   return (
     <div className="plp-page">
       <div className="plp-container">
+        {/* HEADER */}
         <div className="plp-header">
           <button className="back-btn" onClick={goHome}>
             ← Back
           </button>
-          <button className="filter-btn" onClick={() => setShowFilters(true)}>
+
+          <h1>Explore Premium Electronics</h1>
+
+          <button
+            className="action-btn cart-button"
+            onClick={(e) => {
+                    e.stopPropagation();
+                    goToCart();
+                  }}
+          >
+            🛒
+
+            {cartCount > 0 && (
+              <span className="cart-badge">{cartCount}</span>
+            )}
+
+            {cartCount > 0 && (
+              <span className="cart-total">
+                ₹ {cartTotal.toLocaleString("en-IN")}
+              </span>
+            )}
+          </button>
+
+          <button
+            className="filter-btn"
+            onClick={() => setShowFilters(true)}
+          >
             Filters
           </button>
-          <h1>Explore Premium Electronics</h1>
 
           <select className="sort-dropdown">
             <option>Sort by: Popularity</option>
@@ -145,6 +187,7 @@ export default function ProductListing({ goHome, openProduct }) {
           </select>
         </div>
 
+        {/* LAYOUT */}
         <div className="plp-layout">
           <aside className={`filters-sidebar ${showFilters ? "open" : ""}`}>
             <button
@@ -153,6 +196,7 @@ export default function ProductListing({ goHome, openProduct }) {
             >
               ✕
             </button>
+
             <div className="filter-group">
               <h2>CATEGORY</h2>
               {[
@@ -179,6 +223,7 @@ export default function ProductListing({ goHome, openProduct }) {
             </div>
           </aside>
 
+          {/* PRODUCTS */}
           <div className="products-section">
             <p className="product-count">
               Showing {loading ? "..." : products.length} products
@@ -194,6 +239,7 @@ export default function ProductListing({ goHome, openProduct }) {
                       key={product.id}
                       product={product}
                       openProduct={openProduct}
+                      addToCart={addToCart}
                     />
                   ))}
             </div>

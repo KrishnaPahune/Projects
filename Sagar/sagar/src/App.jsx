@@ -28,6 +28,7 @@ function App() {
             setPreviousPage(page);
             setPage("details");
           }}
+          goToCart={() => setPage("cart")}
           
         />
       )}
