@@ -5,7 +5,7 @@ import BottomBar from './BottomBar';
 import './Header.css';
 import { useCart } from "../../context/CartContext";
 
-const Header = () => {
+const Header = ({ goToCart, goHome }) => {
   const { cartCount } = useCart();
   console.log(cartCount);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,7 +20,7 @@ const Header = () => {
       <TopBar />
 
       {/* Child Component 2: Middle Bar */}
-      <MiddleBar onMenuToggle={toggleMenu} />
+      <MiddleBar onMenuToggle={toggleMenu} goToCart={goToCart} goHome={goHome} />
 
       {/* Child Component 3: Bottom Bar */}
       <BottomBar />

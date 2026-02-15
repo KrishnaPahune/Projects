@@ -60,6 +60,21 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  // ✅ UPDATE QTY (set to specific value)
+  const updateQty = (id, newQty) => {
+    if (newQty <= 0) {
+      removeFromCart(id);
+    } else {
+      setCartItems((prev) =>
+        prev.map((item) =>
+          item.id === id
+            ? { ...item, qty: newQty }
+            : item
+        )
+      );
+    }
+  };
+
   // ✅ TOTAL ITEMS (for header badge)
   const cartCount = cartItems.reduce(
     (total, item) => total + item.qty,
@@ -72,6 +87,8 @@ export const CartProvider = ({ children }) => {
     0
   );
 
+  const totalPrice = cartTotal;
+
   return (
     <CartContext.Provider
       value={{
@@ -80,8 +97,10 @@ export const CartProvider = ({ children }) => {
         removeFromCart,
         increaseQty,
         decreaseQty,
+        updateQty,
         cartCount,
         cartTotal,
+        totalPrice,
       }}
     >
       {children}

@@ -250,6 +250,7 @@ const FeaturedProducts = ({ goToListing, goHome, openProduct }) => {
                     e.stopPropagation();
                     addToCart(product);
                     showToast("Item added to cart 🛒");
+                    console.log(product)
                   }}
                 >
                   <span className="cart-icon">🛒</span>

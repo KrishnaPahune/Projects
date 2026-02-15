@@ -3,7 +3,7 @@ import "./MiddleBar.css";
 import logo from "../../assets/images/sagar_logo.png";
 import { useCart } from "../../context/CartContext";
 
-const MiddleBar = ({ onMenuToggle }) => {
+const MiddleBar = ({ onMenuToggle, goToCart }) => {
   const { cartItems } = useCart();
   const totalPrice = cartItems.reduce(
     (total, item) =>
@@ -55,19 +55,23 @@ const MiddleBar = ({ onMenuToggle }) => {
           <button className="action-btn" aria-label="Wishlist">
             <span className="action-icon">❤️</span>
           </button>
-          <a href="/cart" className="action-btn cart-button">
+          <button
+            className="action-btn cart-button"
+            onClick={goToCart}
+            aria-label="Cart"
+          >
             <span className="action-icon">🛒</span>
 
-            {cartItems.length > 0 && (
+            {totalItems > 0 && (
               <span className="cart-badge">{totalItems}</span>
             )}
 
-            {cartItems.length > 0 && (
+            {totalItems > 0 && (
               <span className="cart-total">
                 ₹ {totalPrice.toLocaleString("en-IN")}
               </span>
             )}
-          </a>
+          </button>
         </div>
       </div>
     </div>
