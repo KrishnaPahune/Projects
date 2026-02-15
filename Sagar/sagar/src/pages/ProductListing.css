@@ -169,6 +169,7 @@
   font-size:14px;
   cursor:pointer;
   transition:var(--transition-fast);
+  display: none;
 }
 
 .filter-btn:hover{
@@ -488,6 +489,7 @@ button{
   .filter-btn {
     font-size: 12px;
     padding: 8px 12px;
+    display: block;
   }
 
 }
@@ -547,6 +549,7 @@ button{
   .filter-btn {
     font-size: 11px;
     padding: 6px 10px;
+    display: block;
   }
 
 }
