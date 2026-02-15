@@ -134,6 +134,7 @@ export default function ProductListing({
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // ✅ SINGLE useCart call
   const { cartItems, cartCount, cartTotal, addToCart } = useCart();
@@ -145,6 +146,12 @@ export default function ProductListing({
     });
   }, []);
 
+  // Filter products based on search query
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    product.brand.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="plp-page">
       <div className="plp-container">
@@ -154,7 +161,13 @@ export default function ProductListing({
             ← Back
           </button>
 
-          <h1>Explore Premium Electronics</h1>
+          <input
+            type="text"
+            className="search-bar"
+            placeholder="Explore Premium Electronics"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
 
           <div className="header-actions">
             <select className="sort-dropdown">
@@ -227,7 +240,7 @@ export default function ProductListing({
           {/* PRODUCTS */}
           <div className="products-section">
             <p className="product-count">
-              Showing {loading ? "..." : products.length} products
+              Showing {loading ? "..." : filteredProducts.length} products
             </p>
 
             <div className="product-grid">
@@ -235,7 +248,7 @@ export default function ProductListing({
                 ? Array.from({ length: 8 }).map((_, i) => (
                     <SkeletonCard key={i} />
                   ))
-                : products.map((product) => (
+                : filteredProducts.map((product) => (
                     <ProductCard
                       key={product.id}
                       product={product}

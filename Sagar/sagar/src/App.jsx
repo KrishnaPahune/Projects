@@ -6,7 +6,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Toast from "./components/Toast";
 import { useToast } from "./context/ToastContext";
 import Cart from "./pages/Cart";
-
+import Checkout from "./pages/Checkout";
 function App() {
   const { toast } = useToast();
   const [page, setPage] = useState("home");
@@ -36,10 +36,13 @@ function App() {
           goHome={() => setPage("home")}
           openProduct={(product) => {
             setSelectedProduct(product);
-            setPreviousPage(page);
+            setPreviousPage("listing");
             setPage("details");
           }}
-          goToCart={() => setPage("cart")}
+          goToCart={() => {
+            setPreviousPage("listing");
+            setPage("cart");
+          }}
         />
       )}
 
@@ -47,9 +50,21 @@ function App() {
         <ProductDetail
           product={selectedProduct}
           goBack={() => setPage(previousPage)}
+          goToCart={() => {
+            setPreviousPage("details");
+            setPage("cart");
+          }}
         />
       )}
-      {page === "cart" && <Cart goBack={() => setPage("listing")} />}
+
+      {page === "cart" && (
+        <Cart
+          goBack={() => setPage(previousPage)}
+          goToCheckout={() => setPage("checkout")}
+        />
+      )}
+
+      {page === "checkout" && <Checkout goBack={() => setPage("cart")} />}
       {toast && <Toast message={toast.message} type={toast.type} />}
     </>
   );

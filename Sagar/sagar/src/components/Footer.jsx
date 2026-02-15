@@ -105,7 +105,7 @@ const Footer = () => {
                 <span className="contact-icon">📍</span>
                 <div className="contact-details">
                   <p className="contact-label">Visit Us</p>
-                  <p className="contact-text">Shop No. 123, MG Road<br/>Mumbai, Maharashtra 400001</p>
+                  <p className="contact-text"><br/>Mumbai, Maharashtra 400001</p>
                 </div>
               </div>
               
