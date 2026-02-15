@@ -6,10 +6,15 @@ function Cart({ goBack }) {
 
   if (cartItems.length === 0) {
     return (
-      <div className="cart-page empty-cart">
-        <button onClick={goBack}>← Continue Shopping</button>
-        <h2>Your cart is empty 🛒</h2>
-        <p>Add something you love.</p>
+      <div className="cart-page">
+        <button onClick={goBack} className="back-btn">← Continue Shopping</button>
+        <div className="empty-cart">
+          <div className="empty-cart-icon">🛒</div>
+          <h2>Your cart is empty</h2>
+          <p>Looks like you haven't added anything to your cart yet.</p>
+          <p className="empty-cart-subtitle">Start shopping and add your favorite products!</p>
+          <button onClick={goBack} className="shop-btn">Continue Shopping</button>
+        </div>
       </div>
     );
   }
