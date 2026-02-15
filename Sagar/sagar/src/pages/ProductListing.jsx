@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ProductListing.css";
 import { useCart } from "../context/CartContext";
+import { useToast } from "../context/ToastContext";
 
 // Fake API simulation
 const getProducts = () => {
@@ -68,17 +69,15 @@ const getProducts = () => {
 
 //////////////////////////////////////////////////////////////
 
-const ProductCard = ({ product, openProduct }) => {
-
+const ProductCard = ({ product, openProduct}) => {
+  const { showToast } = useToast();
   const { addToCart } = useCart(); // ✅ GET FROM CONTEXT
-
   const discount = Math.round(
     ((product.originalPrice - product.price) / product.originalPrice) * 100,
   );
 
   return (
     <div className="product-card" onClick={() => openProduct(product)}>
-      
       <div className="product-image-wrapper">
         <img src={product.image} alt={product.name} />
       </div>
@@ -100,12 +99,11 @@ const ProductCard = ({ product, openProduct }) => {
           onClick={(e) => {
             e.stopPropagation(); // prevents opening product page
             addToCart(product);
-            console.log("Button clicked")
+            showToast("Item added to cart 🛒");
           }}
         >
           🛒 Add to Cart
         </button>
-
       </div>
     </div>
   );
@@ -126,10 +124,16 @@ const SkeletonCard = () => (
 
 //////////////////////////////////////////////////////////////
 
-export default function ProductListing({ goHome, openProduct, goToCart, product }) {
+export default function ProductListing({
+  goHome,
+  openProduct,
+  goToCart,
+  product,
+}) {
   const [showFilters, setShowFilters] = useState(false);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [toast, setToast] = useState(null);
 
   // ✅ SINGLE useCart call
   const { cartItems, cartCount, cartTotal, addToCart } = useCart();
@@ -151,7 +155,7 @@ export default function ProductListing({ goHome, openProduct, goToCart, product 
           </button>
 
           <h1>Explore Premium Electronics</h1>
-          
+
           <div className="header-actions">
             <select className="sort-dropdown">
               <option>Sort by: Popularity</option>
@@ -160,26 +164,20 @@ export default function ProductListing({ goHome, openProduct, goToCart, product 
               <option>Newest</option>
             </select>
 
-            <button
-              className="filter-btn"
-              onClick={() => setShowFilters(true)}
-            >
+            <button className="filter-btn" onClick={() => setShowFilters(true)}>
               Filters
             </button>
 
             <button
               className="action-btn cart-button"
               onClick={(e) => {
-                      e.stopPropagation();
-                      goToCart();
-                    }}
+                e.stopPropagation();
+                goToCart();
+              }}
             >
-               <span className="action-icon">🛒</span>
+              <span className="action-icon">🛒</span>
 
-
-              {cartCount > 0 && (
-                <span className="cart-badge">{cartCount}</span>
-              )}
+              {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
 
               {cartCount > 0 && (
                 <span className="cart-total">
@@ -243,6 +241,7 @@ export default function ProductListing({ goHome, openProduct, goToCart, product 
                       product={product}
                       openProduct={openProduct}
                       addToCart={addToCart}
+                      setToast={setToast}
                     />
                   ))}
             </div>

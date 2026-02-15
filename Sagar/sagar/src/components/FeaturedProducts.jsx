@@ -9,8 +9,10 @@ import wm1 from "../assets/images/wm1.jpg";
 import wm2 from "../assets/images/wm2.webp";
 import ac1 from "../assets/images/ac1.webp";
 import { useCart } from "../context/CartContext";
+import { useToast } from "../context/ToastContext";
 
 const FeaturedProducts = ({ goToListing, goHome, openProduct }) => {
+  const { showToast } = useToast();
   const [activeTab, setActiveTab] = useState("trending");
   const { addToCart } = useCart();
 
@@ -247,6 +249,7 @@ const FeaturedProducts = ({ goToListing, goHome, openProduct }) => {
                   onClick={(e) => {
                     e.stopPropagation();
                     addToCart(product);
+                    showToast("Item added to cart 🛒");
                   }}
                 >
                   <span className="cart-icon">🛒</span>

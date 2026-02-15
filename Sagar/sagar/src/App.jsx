@@ -3,15 +3,21 @@ import Home from "./pages/Home";
 import "./global.css";
 import ProductListing from "./pages/ProductListing";
 import ProductDetail from "./pages/ProductDetail";
+import Toast from "./components/Toast";
+import { useToast } from "./context/ToastContext";
+
 
 function App() {
+  const { toast } = useToast();
   const [page, setPage] = useState("home");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [previousPage, setPreviousPage] = useState("home");
+  
 
 
   return (
     <>
+
       {page === "home" && (
         <Home goToListing={() => setPage("listing")} 
           openProduct={(product) => {
@@ -39,6 +45,7 @@ function App() {
           goBack={() => setPage(previousPage)}
         />
       )}
+      {toast && <Toast message={toast.message} type={toast.type} />}
     </>
   );
 }

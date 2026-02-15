@@ -152,3 +152,45 @@ img{
   display:block;
 }
 
+.toast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  z-index: 9999;
+  animation: slideIn 0.3s ease, fadeOut 0.3s ease 1.7s forwards;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Success */
+.toast-success {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+/* Error */
+.toast-error {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* Animation */
+@keyframes slideIn {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(120%);
+  }
+}

@@ -1,7 +1,10 @@
 import "./ProductDetail.css";
 import { useEffect } from "react";
 import { useCart } from "../context/CartContext";
+import { useToast } from "../context/ToastContext";
 export default function ProductDetail({ product, goBack }) {
+  
+  const { showToast } = useToast();
   const { addToCart } = useCart();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -50,7 +53,10 @@ export default function ProductDetail({ product, goBack }) {
 
             {/* CTA */}
             <div className="pd-actions">
-              <button className="btn-add" onClick={() => addToCart(product)}>
+              <button className="btn-add" onClick={() => {
+                addToCart(product);
+                showToast("Item added to cart 🛒");
+              }}>
                 {console.log(product)}
                 Add to Cart</button>
 
