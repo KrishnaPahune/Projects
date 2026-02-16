@@ -71,6 +71,11 @@ function Account({ goBack, goToLogin }) {
       )}
 
       <div className="account-container">
+        {/* Back Button */}
+        <button className="account-back-btn" onClick={goBack} title="Go back">
+          ← Back
+        </button>
+
         {/* Header with Profile Card */}
         <div className="account-header">
           <div className="profile-card">

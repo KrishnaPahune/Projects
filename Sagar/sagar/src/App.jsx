@@ -32,7 +32,7 @@ function App() {
         />
       )}
 
-      {page === "register" && <Register goBack={() => setPage("login")} />}
+      {page === "register" && <Register goBack={() => setPage("login")} setPage={setPage} />}
       {page === "home" && (
         <Home
           goToListing={() => setPage("listing")}

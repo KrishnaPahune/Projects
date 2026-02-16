@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import "./Auth.css";
 
-function Register({ goBack }) {
+function Register({ goBack, setPage }) {
   const { register } = useAuth();
 
   const [email, setEmail] = useState("");
@@ -57,6 +57,19 @@ function Register({ goBack }) {
 
           <button className="auth-btn" onClick={handleRegister}>
             Register
+          </button>
+
+          <div className="auth-footer">
+            Already have an account? <span onClick={goBack}>Login</span>
+          </div>
+
+          <div className="auth-divider">Or</div>
+
+          <button 
+            className="guest-btn" 
+            onClick={() => setPage && setPage("home")}
+          >
+            Continue as Guest
           </button>
         </div>
       </div>

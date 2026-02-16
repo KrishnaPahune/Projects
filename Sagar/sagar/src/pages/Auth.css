@@ -75,6 +75,48 @@
 .auth-footer{margin-top:14px;font-size:14px;color:var(--text-light);text-align:center}
 .auth-footer span{color:var(--color-primary);font-weight:600;cursor:pointer}
 
+.auth-divider{
+  margin:16px 0;
+  text-align:center;
+  font-size:13px;
+  color:var(--text-light);
+  position:relative;
+}
+
+.auth-divider::before,
+.auth-divider::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:calc(50% - 16px);
+  height:1px;
+  background:var(--border-light);
+}
+
+.auth-divider::before{left:0}
+.auth-divider::after{right:0}
+
+.guest-btn{
+  padding:12px 14px;
+  background:transparent;
+  color:var(--color-primary);
+  border:2px solid var(--color-primary);
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+  width:100%;
+  transition:all 0.3s ease;
+  font-size:14px;
+}
+
+.guest-btn:hover{
+  background:rgba(139, 92, 246, 0.1);
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.guest-btn:active{transform:translateY(0)}
+
 @media(max-width:900px){
   .auth-container{flex-direction:column;padding:8px}
   .auth-side{display:none}

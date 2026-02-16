@@ -62,6 +62,15 @@ function Login({ goBack, goToRegister, setPage }) {
           <div className="auth-footer">
             Don't have an account? <span onClick={goToRegister}>Register</span>
           </div>
+
+          <div className="auth-divider">Or</div>
+
+          <button 
+            className="guest-btn" 
+            onClick={() => setPage("home")}
+          >
+            Continue as Guest
+          </button>
         </div>
       </div>
     </div>
