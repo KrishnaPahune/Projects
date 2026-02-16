@@ -12,10 +12,10 @@ import Header from '../components/Header/Header'
 import Brands from '../components/Brands'
 
 
-function Home({ goToListing, openProduct, goHome, goToCart }) {
+function Home({ goToListing, openProduct, goHome, goToCart, setPage }) {
   return (
     <div>
-      <Header goToCart={goToCart} goHome={goHome}/>
+      <Header goToCart={goToCart} goHome={goHome} setPage={setPage}/>
       <Hero goToListing={goToListing} goHome={goHome} />
       <FeaturedProducts goToListing={goToListing} goHome={goHome} openProduct={openProduct}/>
       <BrandShowcase />

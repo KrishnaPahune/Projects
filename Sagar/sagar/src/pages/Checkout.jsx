@@ -1,6 +1,7 @@
 import { useCart } from "../context/CartContext";
 import "./Checkout.css";
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 function Checkout({ goBack }) {
   const { cartItems, cartTotal } = useCart();
@@ -9,6 +10,15 @@ function Checkout({ goBack }) {
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formErrors, setFormErrors] = useState({});
+  const { user } = useAuth();
+
+  if (!user) {
+    return (
+      <div>
+        <h2>Please login to continue</h2>
+      </div>
+    );
+  }
 
   const [formData, setFormData] = useState({
     name: "",
@@ -37,7 +47,8 @@ function Checkout({ goBack }) {
     const errors = {};
     if (!formData.name.trim()) errors.name = "Name is required";
     if (!formData.phone.trim()) errors.phone = "Phone number is required";
-    if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, ""))) errors.phone = "Invalid phone number";
+    if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, "")))
+      errors.phone = "Invalid phone number";
     if (!formData.address.trim()) errors.address = "Address is required";
     if (!formData.city.trim()) errors.city = "City is required";
     if (!formData.pincode.trim()) errors.pincode = "Pincode is required";
@@ -69,7 +80,9 @@ function Checkout({ goBack }) {
 
   return (
     <div className="checkout-page">
-      <button onClick={goBack} className="back-btn">← Back to Cart</button>
+      <button onClick={goBack} className="back-btn">
+        ← Back to Cart
+      </button>
 
       {/* STEP INDICATOR */}
       <div className="step-indicator">
@@ -95,7 +108,9 @@ function Checkout({ goBack }) {
           {step === 1 && (
             <div className="checkout-form">
               <h2>Shipping Address</h2>
-              <p className="form-subtitle">Where should we deliver your order?</p>
+              <p className="form-subtitle">
+                Where should we deliver your order?
+              </p>
 
               <div className="form-group">
                 <label htmlFor="name">Full Name *</label>
@@ -108,7 +123,9 @@ function Checkout({ goBack }) {
                   onChange={handleChange}
                   className={formErrors.name ? "error" : ""}
                 />
-                {formErrors.name && <span className="error-text">{formErrors.name}</span>}
+                {formErrors.name && (
+                  <span className="error-text">{formErrors.name}</span>
+                )}
               </div>
 
               <div className="form-group">
@@ -122,7 +139,9 @@ function Checkout({ goBack }) {
                   onChange={handleChange}
                   className={formErrors.phone ? "error" : ""}
                 />
-                {formErrors.phone && <span className="error-text">{formErrors.phone}</span>}
+                {formErrors.phone && (
+                  <span className="error-text">{formErrors.phone}</span>
+                )}
               </div>
 
               <div className="form-group">
@@ -136,7 +155,9 @@ function Checkout({ goBack }) {
                   className={formErrors.address ? "error" : ""}
                   rows="3"
                 />
-                {formErrors.address && <span className="error-text">{formErrors.address}</span>}
+                {formErrors.address && (
+                  <span className="error-text">{formErrors.address}</span>
+                )}
               </div>
 
               <div className="form-row">
@@ -151,7 +172,9 @@ function Checkout({ goBack }) {
                     onChange={handleChange}
                     className={formErrors.city ? "error" : ""}
                   />
-                  {formErrors.city && <span className="error-text">{formErrors.city}</span>}
+                  {formErrors.city && (
+                    <span className="error-text">{formErrors.city}</span>
+                  )}
                 </div>
 
                 <div className="form-group">
@@ -165,7 +188,9 @@ function Checkout({ goBack }) {
                     onChange={handleChange}
                     className={formErrors.pincode ? "error" : ""}
                   />
-                  {formErrors.pincode && <span className="error-text">{formErrors.pincode}</span>}
+                  {formErrors.pincode && (
+                    <span className="error-text">{formErrors.pincode}</span>
+                  )}
                 </div>
               </div>
 
@@ -181,7 +206,9 @@ function Checkout({ goBack }) {
               <p className="form-subtitle">Choose how you'd like to pay</p>
 
               <div className="payment-options">
-                <label className={`payment-option ${paymentMethod === "card" ? "selected" : ""}`}>
+                <label
+                  className={`payment-option ${paymentMethod === "card" ? "selected" : ""}`}
+                >
                   <input
                     type="radio"
                     name="payment"
@@ -196,7 +223,9 @@ function Checkout({ goBack }) {
                   </div>
                 </label>
 
-                <label className={`payment-option ${paymentMethod === "upi" ? "selected" : ""}`}>
+                <label
+                  className={`payment-option ${paymentMethod === "upi" ? "selected" : ""}`}
+                >
                   <input
                     type="radio"
                     name="payment"
@@ -211,7 +240,9 @@ function Checkout({ goBack }) {
                   </div>
                 </label>
 
-                <label className={`payment-option ${paymentMethod === "wallet" ? "selected" : ""}`}>
+                <label
+                  className={`payment-option ${paymentMethod === "wallet" ? "selected" : ""}`}
+                >
                   <input
                     type="radio"
                     name="payment"
@@ -259,9 +290,17 @@ function Checkout({ goBack }) {
                 <h2>Order Confirmed!</h2>
                 <p>Your order has been placed successfully.</p>
                 <div className="order-details">
-                  <p><strong>Name:</strong> {formData.name}</p>
-                  <p><strong>Delivery Address:</strong> {formData.address}, {formData.city} - {formData.pincode}</p>
-                  <p><strong>Payment Method:</strong> {paymentMethod.toUpperCase()}</p>
+                  <p>
+                    <strong>Name:</strong> {formData.name}
+                  </p>
+                  <p>
+                    <strong>Delivery Address:</strong> {formData.address},{" "}
+                    {formData.city} - {formData.pincode}
+                  </p>
+                  <p>
+                    <strong>Payment Method:</strong>{" "}
+                    {paymentMethod.toUpperCase()}
+                  </p>
                 </div>
                 <button className="continue-shopping" onClick={goBack}>
                   Continue Shopping
@@ -283,7 +322,9 @@ function Checkout({ goBack }) {
                     <p className="item-name">{item.name}</p>
                     <p className="item-qty">Qty: {item.qty}</p>
                   </div>
-                  <p className="item-price">₹ {(item.price * item.qty).toLocaleString("en-IN")}</p>
+                  <p className="item-price">
+                    ₹ {(item.price * item.qty).toLocaleString("en-IN")}
+                  </p>
                 </div>
               ))}
             </div>
@@ -293,7 +334,7 @@ function Checkout({ goBack }) {
             <div className="price-breakdown">
               <div className="price-row">
                 <span>Subtotal ({cartItems.length} items)</span>
-                <span>₹ {(cartTotal).toLocaleString("en-IN")}</span>
+                <span>₹ {cartTotal.toLocaleString("en-IN")}</span>
               </div>
               <div className="price-row">
                 <span>Shipping</span>
@@ -309,7 +350,7 @@ function Checkout({ goBack }) {
 
             <div className="summary-total">
               <span>Total Amount</span>
-              <span>₹ {(cartTotal).toLocaleString("en-IN")}</span>
+              <span>₹ {cartTotal.toLocaleString("en-IN")}</span>
             </div>
 
             <div className="security-info">

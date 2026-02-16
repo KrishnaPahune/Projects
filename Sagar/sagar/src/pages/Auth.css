@@ -1,0 +1,86 @@
+.auth-page{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--bg-soft);
+  padding:32px;
+  font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+.auth-container{
+  width:100%;
+  max-width:980px;
+  display:flex;
+  gap:28px;
+  align-items:stretch;
+}
+
+.auth-side{
+  flex:1.1;
+  background:var(--gradient-brand);
+  border-radius:14px;
+  padding:34px;
+  color:var(--bg-white);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  box-shadow:0 10px 30px rgba(2,6,23,0.06);
+}
+
+.auth-side h3{font-size:22px;margin:0 0 12px 0;font-weight:800;color:var(--bg-white)}
+.auth-side p{color:rgba(255,255,255,0.92);margin:0 0 8px 0;line-height:1.45;font-size:15px}
+
+.auth-card{
+  flex:0.9;
+  background:var(--bg-white);
+  padding:34px;
+  border-radius:14px;
+  box-shadow:var(--shadow-lg);
+  display:flex;
+  flex-direction:column;
+}
+
+.auth-header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.logo{font-weight:800;color:var(--color-primary);font-size:20px}
+.brand-sub{color:var(--text-light);font-size:13px}
+
+.auth-card h2{margin:8px 0 18px 0;font-size:22px;color:var(--color-primary)}
+
+.input-group{position:relative;margin-bottom:16px}
+.input-group input{
+  width:100%;
+  padding:12px 44px 12px 14px;
+  border-radius:10px;
+  border: 1px solid var(--border-light);
+  font-size:14px;
+  background:transparent;
+}
+.input-group input:focus{outline:none;border-color:var(--color-primary)}
+.input-toggle{
+  position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  background:transparent;border:0;color:var(--text-light);cursor:pointer;padding:6px 8px;border-radius:8px;font-size:13px
+}
+
+.auth-btn{
+  margin-top:6px;
+  display:inline-block;
+  padding:12px 14px;
+  background:var(--gradient-brand-hover);
+  color:var(--bg-white);border:0;border-radius:10px;cursor:pointer;font-weight:600;width:100%;
+  box-shadow:var(--glow-brand);
+}
+.auth-btn:active{transform:translateY(1px)}
+
+.auth-footer{margin-top:14px;font-size:14px;color:var(--text-light);text-align:center}
+.auth-footer span{color:var(--color-primary);font-weight:600;cursor:pointer}
+
+@media(max-width:900px){
+  .auth-container{flex-direction:column;padding:8px}
+  .auth-side{display:none}
+}
+
+@media(max-width:420px){
+  .auth-card{padding:18px;border-radius:12px}
+  .input-group input{padding-right:38px}
+}

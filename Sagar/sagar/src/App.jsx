@@ -7,6 +7,9 @@ import Toast from "./components/Toast";
 import { useToast } from "./context/ToastContext";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Account from "./pages/Account";
 function App() {
   const { toast } = useToast();
   const [page, setPage] = useState("home");
@@ -15,6 +18,15 @@ function App() {
 
   return (
     <>
+      {page === "login" && (
+        <Login
+          goBack={() => setPage("home")}
+          goToRegister={() => setPage("register")}
+        />
+      )}
+
+      {page === "register" && <Register goBack={() => setPage("login")} />}
+      {page === "account" && <Account goBack={() => setPage("home")} />}
       {page === "home" && (
         <Home
           goToListing={() => setPage("listing")}
@@ -22,7 +34,9 @@ function App() {
           goToCart={() => {
             setPreviousPage("home");
             setPage("cart");
+             
           }}
+          setPage={setPage}
           openProduct={(product) => {
             setSelectedProduct(product);
             setPreviousPage("home");

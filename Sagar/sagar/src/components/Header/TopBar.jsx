@@ -1,7 +1,7 @@
-import React from 'react';
-import './TopBar.css';
+import React from "react";
+import "./TopBar.css";
 
-const TopBar = () => {
+const TopBar = ({ setPage, user }) => {
   return (
     <div className="top-bar">
       <div className="top-bar-container">
@@ -28,10 +28,13 @@ const TopBar = () => {
             <span className="icon">🛍️</span>
             <span>Shop</span>
           </a>
-          <a href="/account" className="top-bar-link">
+          <div
+            className="top-bar-link"
+            onClick={() => setPage(user ? "account" : "login")}
+          >
             <span className="icon">👤</span>
             <span>My Account</span>
-          </a>
+          </div>
         </div>
       </div>
     </div>

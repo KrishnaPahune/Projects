@@ -4,8 +4,12 @@ import MiddleBar from './MiddleBar';
 import BottomBar from './BottomBar';
 import './Header.css';
 import { useCart } from "../../context/CartContext";
+import { useAuth } from "../../context/AuthContext";
 
-const Header = ({ goToCart, goHome }) => {
+
+const Header = ({ goToCart, goHome, setPage }) => {
+  const { user } = useAuth();
+
   const { cartCount } = useCart();
   console.log(cartCount);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,7 +21,7 @@ const Header = ({ goToCart, goHome }) => {
   return (
     <header className="header">
       {/* Child Component 1: Top Bar */}
-      <TopBar />
+      <TopBar setPage={setPage} user={user} />
 
       {/* Child Component 2: Middle Bar */}
       <MiddleBar onMenuToggle={toggleMenu} goToCart={goToCart} goHome={goHome} />
