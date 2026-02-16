@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import "./Auth.css";
 
-function Login({ goBack, goToRegister }) {
+function Login({ goBack, goToRegister, setPage }) {
   const { login } = useAuth();
 
   const [email, setEmail] = useState("");
@@ -10,9 +10,9 @@ function Login({ goBack, goToRegister }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = () => {
-    login(email, password);
-    goBack();
-  };
+  login(email, password);
+  setPage("account");
+};
 
   return (
     <div className="auth-page">

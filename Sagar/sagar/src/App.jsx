@@ -18,15 +18,21 @@ function App() {
 
   return (
     <>
+      {page === "account" && (
+        <Account
+          goBack={() => setPage("home")}
+          goToLogin={() => setPage("login")}
+        />
+      )}
       {page === "login" && (
         <Login
           goBack={() => setPage("home")}
           goToRegister={() => setPage("register")}
+          setPage={setPage}
         />
       )}
 
       {page === "register" && <Register goBack={() => setPage("login")} />}
-      {page === "account" && <Account goBack={() => setPage("home")} />}
       {page === "home" && (
         <Home
           goToListing={() => setPage("listing")}
@@ -34,7 +40,6 @@ function App() {
           goToCart={() => {
             setPreviousPage("home");
             setPage("cart");
-             
           }}
           setPage={setPage}
           openProduct={(product) => {
