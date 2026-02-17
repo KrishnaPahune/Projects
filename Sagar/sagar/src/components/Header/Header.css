@@ -126,6 +126,11 @@
   border-bottom: 1px solid rgba(139, 92, 246, 0.1);
   transition: all 0.3s ease;
   position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
 }
 
 .mobile-nav-link::before {

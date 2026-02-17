@@ -5,14 +5,17 @@ import "./index.css";
 import App from "./App.jsx";
 import { ToastProvider } from "./context/ToastContext";
 import { AuthProvider } from "./context/AuthContext";
+import { OrderProvider } from "./context/OrderContext";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
       <CartProvider>
-        <ToastProvider>
-          <App />
-      </ToastProvider>
-    </CartProvider>
-  </AuthProvider>
+        <OrderProvider>
+          <ToastProvider>
+            <App />
+          </ToastProvider>
+        </OrderProvider>
+      </CartProvider>
+    </AuthProvider>
   </StrictMode>,
 );

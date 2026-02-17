@@ -39,15 +39,46 @@ const Header = ({ goToCart, goHome, setPage }) => {
               <button className="close-btn" onClick={toggleMenu}>✕</button>
             </div>
             <nav className="mobile-nav">
-              <a href="/" className="mobile-nav-link">🏠 Home</a>
-              <a href="/shop" className="mobile-nav-link">🛍️ Shop</a>
-              <a href="/products" className="mobile-nav-link">📱 All Products</a>
-              <a href="/offers" className="mobile-nav-link">🎁 Special Offers</a>
-              <a href="/store-locator" className="mobile-nav-link">📍 Store Locator</a>
-              <a href="/track-order" className="mobile-nav-link">📦 Track Order</a>
-              <a href="/account" className="mobile-nav-link">👤 My Account</a>
-              <a href="/wishlist" className="mobile-nav-link">❤️ Wishlist</a>
-              <a href="/contact" className="mobile-nav-link">📞 Contact Us</a>
+              <button
+                className="mobile-nav-link"
+                onClick={() => {
+                  setPage("home");
+                  toggleMenu();
+                }}
+              >
+                🏠 Home
+              </button>
+              <button
+                className="mobile-nav-link"
+                onClick={() => {
+                  setPage("listing");
+                  toggleMenu();
+                }}
+              >
+                🛍️ Shop
+              </button>
+              <button
+                className="mobile-nav-link"
+                onClick={() => {
+                  if (user) {
+                    setPage("account");
+                  } else {
+                    setPage("login");
+                  }
+                  toggleMenu();
+                }}
+              >
+                👤 My Account
+              </button>
+              <button
+                className="mobile-nav-link"
+                onClick={() => {
+                  setPage("cart");
+                  toggleMenu();
+                }}
+              >
+                🛒 Cart
+              </button>
             </nav>
           </div>
         </>

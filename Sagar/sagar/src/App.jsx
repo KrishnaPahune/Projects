@@ -7,6 +7,7 @@ import Toast from "./components/Toast";
 import { useToast } from "./context/ToastContext";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import OrderConfirmation from "./pages/OrderConfirmation";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Account from "./pages/Account";
@@ -83,7 +84,23 @@ function App() {
         />
       )}
 
-      {page === "checkout" && <Checkout goBack={() => setPage("cart")} />}
+      {page === "checkout" && (
+        <Checkout
+          goBack={() => setPage("cart")}
+          goToLogin={() => setPage("login")}
+          goToConfirmation={() => setPage("confirmation")}
+        />
+      )}
+
+      {page === "confirmation" && (
+        <OrderConfirmation
+          goBack={() => {
+            setPreviousPage("home");
+            setPage("account");
+          }}
+          goHome={() => setPage("home")}
+        />
+      )}
       {toast && <Toast message={toast.message} type={toast.type} />}
     </>
   );

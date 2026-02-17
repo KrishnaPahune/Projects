@@ -2,20 +2,36 @@ import { useCart } from "../context/CartContext";
 import "./Checkout.css";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useOrder } from "../context/OrderContext";
 
-function Checkout({ goBack }) {
-  const { cartItems, cartTotal } = useCart();
+function Checkout({ goBack, goToLogin, goToConfirmation }) {
+  const { cartItems, cartTotal, clearCart } = useCart();
   const [step, setStep] = useState(1);
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const { user } = useAuth();
+  const { createOrder } = useOrder();
 
   if (!user) {
     return (
-      <div>
-        <h2>Please login to continue</h2>
+      <div className="checkout-page">
+        <div className="login-required-container">
+          <div className="login-required-content">
+            <div className="login-icon">🔐</div>
+            <h2>Login Required</h2>
+            <p>Please log in to your account to proceed with checkout.</p>
+            <div className="login-actions">
+              <button onClick={goToLogin} className="login-btn-primary">
+                Login to Your Account
+              </button>
+              <button onClick={goBack} className="login-btn-secondary">
+                ← Back to Cart
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -73,8 +89,24 @@ function Checkout({ goBack }) {
     }
     setLoading(true);
     setTimeout(() => {
+      // Create order object
+      const orderData = {
+        userEmail: user.email,
+        shippingData: formData,
+        items: cartItems,
+        paymentMethod: paymentMethod,
+        total: cartTotal,
+      };
+
+      // Save order to context
+      createOrder(orderData);
+
+      // Clear cart
+      clearCart();
+
+      // Navigate to confirmation
       setLoading(false);
-      setStep(3);
+      goToConfirmation();
     }, 1500);
   };
 
@@ -280,32 +312,6 @@ function Checkout({ goBack }) {
               <button className="back-step-btn" onClick={() => setStep(1)}>
                 ← Back to Shipping
               </button>
-            </div>
-          )}
-
-          {step === 3 && (
-            <div className="checkout-form">
-              <div className="success-message">
-                <div className="success-icon">✓</div>
-                <h2>Order Confirmed!</h2>
-                <p>Your order has been placed successfully.</p>
-                <div className="order-details">
-                  <p>
-                    <strong>Name:</strong> {formData.name}
-                  </p>
-                  <p>
-                    <strong>Delivery Address:</strong> {formData.address},{" "}
-                    {formData.city} - {formData.pincode}
-                  </p>
-                  <p>
-                    <strong>Payment Method:</strong>{" "}
-                    {paymentMethod.toUpperCase()}
-                  </p>
-                </div>
-                <button className="continue-shopping" onClick={goBack}>
-                  Continue Shopping
-                </button>
-              </div>
             </div>
           )}
         </div>

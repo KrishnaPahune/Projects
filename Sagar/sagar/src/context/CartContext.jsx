@@ -75,6 +75,11 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  // ✅ CLEAR CART
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   // ✅ TOTAL ITEMS (for header badge)
   const cartCount = cartItems.reduce(
     (total, item) => total + item.qty,
@@ -98,6 +103,7 @@ export const CartProvider = ({ children }) => {
         increaseQty,
         decreaseQty,
         updateQty,
+        clearCart,
         cartCount,
         cartTotal,
         totalPrice,

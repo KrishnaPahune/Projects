@@ -23,6 +23,131 @@
   color: #8b5cf6;
 }
 
+/* ================= LOGIN REQUIRED ================= */
+
+.login-required-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.login-required-content {
+  background: white;
+  border-radius: 16px;
+  padding: 60px 40px;
+  text-align: center;
+  max-width: 500px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.3s ease-out;
+}
+
+.login-icon {
+  font-size: 80px;
+  margin-bottom: 30px;
+  display: inline-block;
+}
+
+.login-required-content h2 {
+  color: var(--text-dark);
+  font-size: 28px;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.login-required-content p {
+  color: var(--text-gray);
+  font-size: 16px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.login-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-btn-primary {
+  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+  color: white;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.login-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+.login-btn-primary:active {
+  transform: translateY(0);
+}
+
+.login-btn-secondary {
+  background: transparent;
+  color: #8b5cf6;
+  padding: 12px 28px;
+  border: 2px solid #8b5cf6;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.login-btn-secondary:hover {
+  background: rgba(139, 92, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+.login-btn-secondary:active {
+  transform: translateY(0);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .login-required-content {
+    padding: 40px 25px;
+  }
+
+  .login-required-content h2 {
+    font-size: 24px;
+  }
+
+  .login-icon {
+    font-size: 60px;
+    margin-bottom: 20px;
+  }
+
+  .login-actions {
+    gap: 12px;
+  }
+
+  .login-btn-primary,
+  .login-btn-secondary {
+    padding: 12px 24px;
+    font-size: 15px;
+  }
+}
+
 /* ================= STEP INDICATOR ================= */
 
 .step-indicator {

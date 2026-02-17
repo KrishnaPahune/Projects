@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
+import { useOrder } from "../context/OrderContext";
 import "./Account.css";
 
 function Account({ goBack, goToLogin }) {
   const { user, logout } = useAuth();
   const { showToast } = useToast();
+  const { getOrdersByEmail } = useOrder();
   const [activeTab, setActiveTab] = useState("profile");
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -14,6 +16,9 @@ function Account({ goBack, goToLogin }) {
     address: user?.address || "",
   });
   const [showWelcome, setShowWelcome] = useState(true);
+
+  // Get orders for current user
+  const userOrders = getOrdersByEmail(user?.email);
 
   // 🔒 Protect page
   if (!user) {
@@ -57,7 +62,7 @@ function Account({ goBack, goToLogin }) {
   };
 
   const stats = [
-    { label: "Total Orders", value: "0", icon: "📦" },
+    { label: "Total Orders", value: userOrders.length.toString(), icon: "📦" },
     { label: "Saved Addresses", value: "0", icon: "📍" },
     { label: "Wishlist Items", value: "0", icon: "❤️" },
   ];
@@ -232,14 +237,63 @@ function Account({ goBack, goToLogin }) {
             {activeTab === "orders" && (
               <div className="tab-content">
                 <h2>Your Orders</h2>
-                <div className="empty-state">
-                  <div className="empty-icon">📭</div>
-                  <p>You haven't placed any orders yet.</p>
-                  <p className="empty-hint">Start shopping to see your orders here!</p>
-                  <a href="/" className="cta-button">
-                    🛍️ Continue Shopping
-                  </a>
-                </div>
+                {userOrders.length === 0 ? (
+                  <div className="empty-state">
+                    <div className="empty-icon">📭</div>
+                    <p>You haven't placed any orders yet.</p>
+                    <p className="empty-hint">Start shopping to see your orders here!</p>
+                    <a href="/" className="cta-button">
+                      🛍️ Continue Shopping
+                    </a>
+                  </div>
+                ) : (
+                  <div className="orders-list">
+                    {userOrders.map((order) => (
+                      <div key={order.id} className="order-card">
+                        <div className="order-header">
+                          <div className="order-id-date">
+                            <p className="order-id">Order ID: {order.id}</p>
+                            <p className="order-date">
+                              {new Date(order.createdAt).toLocaleDateString("en-IN", {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                              })}
+                            </p>
+                          </div>
+                          <span className="order-status confirmed">{order.status}</span>
+                        </div>
+
+                        <div className="order-items-preview">
+                          {order.items.slice(0, 2).map((item) => (
+                            <div key={item.id} className="preview-item">
+                              <img src={item.image} alt={item.name} />
+                              <div className="preview-info">
+                                <p>{item.name}</p>
+                                <p className="qty">Qty: {item.qty}</p>
+                              </div>
+                            </div>
+                          ))}
+                          {order.items.length > 2 && (
+                            <div className="preview-more">
+                              +{order.items.length - 2} more
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="order-footer">
+                          <div className="order-total">
+                            <p className="total-label">Total Amount</p>
+                            <p className="total-value">₹{order.total.toLocaleString("en-IN")}</p>
+                          </div>
+                          <button className="view-details-btn">
+                            View Details →
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
 
