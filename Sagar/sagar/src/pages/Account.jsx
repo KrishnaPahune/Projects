@@ -4,7 +4,7 @@ import { useToast } from "../context/ToastContext";
 import { useOrder } from "../context/OrderContext";
 import "./Account.css";
 
-function Account({ goBack, goToLogin }) {
+function Account({ goBack, goToLogin, setPage, setSelectedOrderId }) {
   const { user, logout } = useAuth();
   const { showToast } = useToast();
   const { getOrdersByEmail } = useOrder();
@@ -286,7 +286,13 @@ function Account({ goBack, goToLogin }) {
                             <p className="total-label">Total Amount</p>
                             <p className="total-value">₹{order.total.toLocaleString("en-IN")}</p>
                           </div>
-                          <button className="view-details-btn">
+                          <button
+                            className="view-details-btn"
+                            onClick={() => {
+                              setSelectedOrderId(order.id);
+                              setPage("order-detail");
+                            }}
+                          >
                             View Details →
                           </button>
                         </div>

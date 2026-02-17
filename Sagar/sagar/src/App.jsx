@@ -8,6 +8,7 @@ import { useToast } from "./context/ToastContext";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import OrderConfirmation from "./pages/OrderConfirmation";
+import OrderDetail from "./pages/OrderDetail";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Account from "./pages/Account";
@@ -16,6 +17,7 @@ function App() {
   const [page, setPage] = useState("home");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [previousPage, setPreviousPage] = useState("home");
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
 
   return (
     <>
@@ -23,6 +25,8 @@ function App() {
         <Account
           goBack={() => setPage("home")}
           goToLogin={() => setPage("login")}
+          setPage={setPage}
+          setSelectedOrderId={setSelectedOrderId}
         />
       )}
       {page === "login" && (
@@ -101,6 +105,18 @@ function App() {
           goHome={() => setPage("home")}
         />
       )}
+
+      {page === "order-detail" && (
+        <OrderDetail
+          orderId={selectedOrderId}
+          goBack={() => setPage("account")}
+          goToCheckout={() => {
+            setPreviousPage("account");
+            setPage("checkout");
+          }}
+        />
+      )}
+
       {toast && <Toast message={toast.message} type={toast.type} />}
     </>
   );
