@@ -3,11 +3,14 @@ import "./Checkout.css";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useOrder } from "../context/OrderContext";
+import { usePayment } from "../context/PaymentContext";
+import PaymentForm from "../components/PaymentForm";
 
 function Checkout({ goBack, goToLogin, goToConfirmation }) {
   const { cartItems, cartTotal, clearCart } = useCart();
+  const { openRazorpayCheckout } = usePayment();
   const [step, setStep] = useState(1);
-  const [paymentMethod, setPaymentMethod] = useState("card");
+  const [paymentMethod, setPaymentMethod] = useState("razorpay");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formErrors, setFormErrors] = useState({});
@@ -87,27 +90,46 @@ function Checkout({ goBack, goToLogin, goToConfirmation }) {
       alert("Please agree to terms and conditions");
       return;
     }
-    setLoading(true);
-    setTimeout(() => {
-      // Create order object
-      const orderData = {
-        userEmail: user.email,
-        shippingData: formData,
-        items: cartItems,
-        paymentMethod: paymentMethod,
-        total: cartTotal,
-      };
 
-      // Save order to context
-      createOrder(orderData);
+    const orderData = {
+      userEmail: user.email,
+      shippingData: formData,
+      items: cartItems,
+      paymentMethod: "razorpay",
+      total: cartTotal,
+    };
 
-      // Clear cart
-      clearCart();
+    try {
+      await openRazorpayCheckout(
+        orderData,
+        (paymentResponse) => {
+          console.log("Payment successful:", paymentResponse);
 
-      // Navigate to confirmation
-      setLoading(false);
-      goToConfirmation();
-    }, 1500);
+          // Save order after successful payment
+          const finalOrderData = {
+            userEmail: user.email,
+            shippingData: formData,
+            items: cartItems,
+            paymentMethod: "razorpay",
+            total: cartTotal,
+            paymentId: paymentResponse.razorpay_payment_id,
+            orderId: paymentResponse.razorpay_order_id,
+            status: "Paid",
+          };
+
+          createOrder(finalOrderData);
+          clearCart();
+          goToConfirmation();
+        },
+        (error) => {
+          console.error("Payment failed:", error);
+          alert(`Payment failed: ${error}`);
+        }
+      );
+    } catch (error) {
+      console.error("Error:", error);
+      alert(`Error: ${error.message}`);
+    }
   };
 
   return (
@@ -234,80 +256,37 @@ function Checkout({ goBack, goToLogin, goToConfirmation }) {
 
           {step === 2 && (
             <div className="checkout-form">
-              <h2>Payment Method</h2>
-              <p className="form-subtitle">Choose how you'd like to pay</p>
+              <h2>Payment</h2>
+              <p className="form-subtitle">Complete your payment securely</p>
 
-              <div className="payment-options">
-                <label
-                  className={`payment-option ${paymentMethod === "card" ? "selected" : ""}`}
-                >
-                  <input
-                    type="radio"
-                    name="payment"
-                    value="card"
-                    checked={paymentMethod === "card"}
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                  />
-                  <span className="payment-icon">💳</span>
-                  <div>
-                    <p className="payment-title">Credit/Debit Card</p>
-                    <p className="payment-desc">Visa, Mastercard, Amex</p>
-                  </div>
-                </label>
-
-                <label
-                  className={`payment-option ${paymentMethod === "upi" ? "selected" : ""}`}
-                >
-                  <input
-                    type="radio"
-                    name="payment"
-                    value="upi"
-                    checked={paymentMethod === "upi"}
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                  />
-                  <span className="payment-icon">📱</span>
-                  <div>
-                    <p className="payment-title">UPI</p>
-                    <p className="payment-desc">Google Pay, PhonePe, Paytm</p>
-                  </div>
-                </label>
-
-                <label
-                  className={`payment-option ${paymentMethod === "wallet" ? "selected" : ""}`}
-                >
-                  <input
-                    type="radio"
-                    name="payment"
-                    value="wallet"
-                    checked={paymentMethod === "wallet"}
-                    onChange={(e) => setPaymentMethod(e.target.value)}
-                  />
-                  <span className="payment-icon">🏦</span>
-                  <div>
-                    <p className="payment-title">Wallet</p>
-                    <p className="payment-desc">Amazon Pay, Apple Pay</p>
-                  </div>
-                </label>
-              </div>
-
-              <div className="terms-section">
-                <label className="terms-checkbox">
-                  <input
-                    type="checkbox"
-                    checked={agreedToTerms}
-                    onChange={(e) => setAgreedToTerms(e.target.checked)}
-                  />
-                  <span>I agree to Terms & Conditions and Privacy Policy</span>
-                </label>
-              </div>
-
-              <button
-                className="place-order-btn"
-                onClick={placeOrder}
-                disabled={loading || !agreedToTerms}
-              >
-                {loading ? "Processing..." : "Complete Order"}
-              </button>
+              <PaymentForm
+                orderData={{
+                  userEmail: user.email,
+                  shippingData: formData,
+                  items: cartItems,
+                  total: cartTotal,
+                }}
+                onPaymentSuccess={(response) => {
+                  console.log("Payment successful:", response);
+                  const finalOrderData = {
+                    userEmail: user.email,
+                    shippingData: formData,
+                    items: cartItems,
+                    paymentMethod: "razorpay",
+                    total: cartTotal,
+                    paymentId: response.razorpay_payment_id,
+                    orderId: response.razorpay_order_id,
+                    status: "Paid",
+                  };
+                  createOrder(finalOrderData);
+                  clearCart();
+                  goToConfirmation();
+                }}
+                onPaymentError={(error) => {
+                  console.error("Payment failed:", error);
+                  alert(`Payment failed: ${error}`);
+                }}
+              />
 
               <button className="back-step-btn" onClick={() => setStep(1)}>
                 ← Back to Shipping

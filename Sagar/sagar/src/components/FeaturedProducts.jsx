@@ -23,7 +23,7 @@ const FeaturedProducts = ({ goToListing, goHome, openProduct }) => {
         id: 1,
         name: "LG OLED55C2 Smart TV",
         category: "Smart TVs",
-        price: 119900,
+        price: 1199,
         originalPrice: 149900,
         image: tv1,
         rating: 4.8,

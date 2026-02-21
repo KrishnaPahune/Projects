@@ -13,7 +13,7 @@ const getProducts = () => {
           name: "Samsung 55 inch 4K Smart TV",
           brand: "Samsung",
           category: "Television",
-          price: 54999,
+          price: 100,
           originalPrice: 69999,
           rating: 4.5,
           reviews: 320,
