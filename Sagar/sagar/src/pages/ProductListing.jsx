@@ -3,146 +3,52 @@ import "./ProductListing.css";
 import { useCart } from "../context/CartContext";
 import { useToast } from "../context/ToastContext";
 
-// Fake API simulation with enhanced data
-const getProducts = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        {
-          id: 1,
-          name: "Samsung 55 inch 4K Smart TV",
-          brand: "Samsung",
-          category: "Television",
-          price: 100,
-          originalPrice: 69999,
-          rating: 4.5,
-          reviews: 320,
-          image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?q=80&w=1200",
-        },
-        {
-          id: 2,
-          name: "LG Double Door Refrigerator",
-          brand: "LG",
-          category: "Refrigerator",
-          price: 38999,
-          originalPrice: 45999,
-          rating: 4.2,
-          reviews: 245,
-          image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1200",
-        },
-        {
-          id: 3,
-          name: "Sony Bravia OLED",
-          brand: "Sony",
-          category: "Television",
-          price: 129999,
-          originalPrice: 149999,
-          rating: 4.8,
-          reviews: 512,
-          image: "https://images.unsplash.com/photo-1601944179066-29786cb9d32a?q=80&w=1200",
-        },
-        {
-          id: 4,
-          name: "Whirlpool Washing Machine",
-          brand: "Whirlpool",
-          category: "Washing Machine",
-          price: 24999,
-          originalPrice: 29999,
-          rating: 4.3,
-          reviews: 180,
-          image: "https://images.unsplash.com/photo-1626808642875-0aa545482dfb?q=80&w=1200",
-        },
-        {
-          id: 5,
-          name: "Panasonic 1.5 Ton AC",
-          brand: "Panasonic",
-          category: "Air Conditioner",
-          price: 41999,
-          originalPrice: 48999,
-          rating: 4.1,
-          reviews: 195,
-          image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=1200",
-        },
-        {
-          id: 6,
-          name: "Bosch Front Load Washer",
-          brand: "Bosch",
-          category: "Washing Machine",
-          price: 52999,
-          originalPrice: 59999,
-          rating: 4.6,
-          reviews: 410,
-          image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1200",
-        },
-        {
-          id: 7,
-          name: "TCL 43 inch HD Smart TV",
-          brand: "TCL",
-          category: "Television",
-          price: 18999,
-          originalPrice: 24999,
-          rating: 3.9,
-          reviews: 145,
-          image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?q=80&w=1200",
-        },
-        {
-          id: 8,
-          name: "Samsung 650L Refrigerator",
-          brand: "Samsung",
-          category: "Refrigerator",
-          price: 52999,
-          originalPrice: 62999,
-          rating: 4.4,
-          reviews: 288,
-          image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1200",
-        },
-        {
-          id: 9,
-          name: "LG Semi-Auto Washing Machine",
-          brand: "LG",
-          category: "Washing Machine",
-          price: 14999,
-          originalPrice: 18999,
-          rating: 3.8,
-          reviews: 92,
-          image: "https://images.unsplash.com/photo-1626808642875-0aa545482dfb?q=80&w=1200",
-        },
-        {
-          id: 10,
-          name: "Daikin 2 Ton AC",
-          brand: "Daikin",
-          category: "Air Conditioner",
-          price: 45999,
-          originalPrice: 54999,
-          rating: 4.7,
-          reviews: 335,
-          image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=1200",
-        },
-        {
-          id: 11,
-          name: "Godrej Double Door Refrigerator",
-          brand: "Godrej",
-          category: "Refrigerator",
-          price: 31999,
-          originalPrice: 38999,
-          rating: 4.0,
-          reviews: 156,
-          image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1200",
-        },
-        {
-          id: 12,
-          name: "IFB Front Load Washing Machine",
-          brand: "IFB",
-          category: "Washing Machine",
-          price: 45999,
-          originalPrice: 55999,
-          rating: 4.5,
-          reviews: 267,
-          image: "https://images.unsplash.com/photo-1626808642875-0aa545482dfb?q=80&w=1200",
-        },
-      ]);
-    }, 700);
-  });
+// Import all product images
+import LGOLed55 from "../assets/images/LGOLed55.jpg";
+import tv2 from "../assets/images/tv2.avif";
+import tv3 from "../assets/images/tv3.jpeg";
+import fridge1 from "../assets/images/fridge1.png";
+import fridge2 from "../assets/images/fridge2.jpg";
+import wm1 from "../assets/images/wm1.jpg";
+import wm2 from "../assets/images/wm2.webp";
+import ac1 from "../assets/images/ac1.webp";
+
+// Map image filenames to imported modules
+const imageMap = {
+  "LGOLed55.jpg": LGOLed55,
+  "tv2.avif": tv2,
+  "tv3.jpeg": tv3,
+  "fridge1.png": fridge1,
+  "fridge2.jpg": fridge2,
+  "wm1.jpg": wm1,
+  "wm2.webp": wm2,
+  "ac1.webp": ac1,
+};
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
+
+// Fetch products from backend and normalize to UI shape
+const getProducts = async () => {
+  const res = await fetch(`${BACKEND_URL}/api/products`);
+  if (!res.ok) throw new Error("Failed to fetch products");
+  const data = await res.json();
+
+  // Map backend product fields to the UI expected fields
+  return data.map((p) => ({
+    id: p.id,
+    name: p.name,
+    brand: p.category || "",
+    category: p.category || "",
+    price: p.price,
+    // Keep an originalPrice slightly higher for UI discount badge
+    originalPrice: Math.round(p.price * 1.12),
+    rating: +(Math.random() * (4.8 - 3.6) + 3.6).toFixed(1),
+    reviews: Math.floor(Math.random() * 500) + 10,
+    // Map image filename to imported image module
+    image: imageMap[p.image] || imageMap["tv2.avif"],
+    description: p.description || "",
+    stock: p.stock ?? 0,
+  }));
 };
 
 //////////////////////////////////////////////////////////////

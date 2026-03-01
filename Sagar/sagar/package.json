@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:all": "cross-env BACKEND_PORT=8001 VITE_BACKEND_URL=http://localhost:8001 concurrently \"backend\\venv\\Scripts\\python.exe -m backend.main\" \"npm run dev\""
   },
   "dependencies": {
     "react": "^19.2.0",
@@ -24,6 +25,8 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "concurrently": "^8.2.0",
+    "cross-env": "^7.0.3"
   }
 }

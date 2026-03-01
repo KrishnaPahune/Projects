@@ -30,6 +30,14 @@ const TopBar = ({ setPage, user }) => {
           </a>
           <div
             className="top-bar-link"
+            onClick={() => setPage("admin")}
+            style={{ cursor: "pointer" }}
+          >
+            <span className="icon">⚙️</span>
+            <span>Admin</span>
+          </div>
+          <div
+            className="top-bar-link"
             onClick={() => setPage(user ? "account" : "login")}
           >
             <span className="icon">👤</span>

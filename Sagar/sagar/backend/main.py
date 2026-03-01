@@ -1,16 +1,23 @@
+import os
+from dotenv import load_dotenv
+
+# Load environment variables FIRST, before importing modules that need them
+load_dotenv()
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import razorpay
-import os
-from dotenv import load_dotenv
 import uuid
 import time
-
-# Load environment variables
-load_dotenv()
+from .db import create_db_and_tables
+from .seed import seed_db
+from .products import router as products_router
 
 app = FastAPI()
+
+# include product API router (SQLModel / PostgreSQL)
+app.include_router(products_router)
 
 # Enable CORS for React frontend
 app.add_middleware(
@@ -142,6 +149,20 @@ def health_check():
     return {"status": "healthy", "service": "Sagar Payment Service"}
 
 
+@app.on_event("startup")
+def on_startup():
+    # Initialize DB tables and seed demo products
+    try:
+        create_db_and_tables()
+        seed_db()
+        print("Database initialized and seeded (if empty)")
+    except Exception as e:
+        print(f"Warning: DB initialization/seed failed: {e}")
+
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # Read port from env so dev scripts can override it
+    port = int(os.getenv("BACKEND_PORT", "8000"))
+    host = os.getenv("BACKEND_HOST", "0.0.0.0")
+    uvicorn.run(app, host=host, port=port)

@@ -114,7 +114,8 @@
 .btn-primary{
   background: var(--gradient-brand);
   color:white;
-  padding:.85rem 1.8rem;
+  padding: .6rem 1.6rem;
+  line-height: 1.2;
   border-radius: var(--radius-md);
   text-decoration:none;
   font-weight:600;
@@ -122,21 +123,18 @@
   box-shadow: var(--shadow-lg);
 }
 
-.btn-primary:hover{
-  transform:translateY(-4px);
-  box-shadow: var(--glow-brand);
-}
-
-/* SECONDARY CTA */
-
+.btn-primary,
 .btn-secondary{
-  border:2px solid white;
   color:white;
-  padding:.85rem 1.8rem;
+  height: 44px;                 /* fixed height */
+  padding: 0 1.8rem;            /* only horizontal padding */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   border-radius: var(--radius-md);
-  text-decoration:none;
-  font-weight:500;
   transition: var(--transition-normal);
+  box-shadow: var(--shadow-lg);
 }
 
 .btn-secondary:hover{

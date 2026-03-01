@@ -1,0 +1,9 @@
+DROP USER IF EXISTS sagar_user;
+CREATE USER sagar_user WITH PASSWORD 'sagarelectronics';
+CREATE DATABASE sagardb OWNER sagar_user;
+ALTER DATABASE sagardb OWNER TO sagar_user;
+GRANT ALL PRIVILEGES ON DATABASE sagardb TO sagar_user;
+\c sagardb
+GRANT ALL PRIVILEGES ON SCHEMA public TO sagar_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO sagar_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO sagar_user;

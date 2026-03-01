@@ -12,6 +12,7 @@ import OrderDetail from "./pages/OrderDetail";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Account from "./pages/Account";
+import Admin from "./pages/Admin";
 function App() {
   const { toast } = useToast();
   const [page, setPage] = useState("home");
@@ -115,6 +116,10 @@ function App() {
             setPage("checkout");
           }}
         />
+      )}
+
+      {page === "admin" && (
+        <Admin />
       )}
 
       {toast && <Toast message={toast.message} type={toast.type} />}
