@@ -10,14 +10,21 @@ from pydantic import BaseModel
 import razorpay
 import uuid
 import time
-from .db import create_db_and_tables
-from .seed import seed_db
-from .products import router as products_router
+from backend.db import create_db_and_tables
+from backend.seed import seed_db
+from backend.products import router as products_router
+from .auth_routes import router as auth_router
 
 app = FastAPI()
 
+# Create all database tables on startup
+create_db_and_tables()
+
 # include product API router (SQLModel / PostgreSQL)
 app.include_router(products_router)
+
+# include auth API router
+app.include_router(auth_router)
 
 # Enable CORS for React frontend
 app.add_middleware(

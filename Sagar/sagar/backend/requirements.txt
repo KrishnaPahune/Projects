@@ -4,3 +4,7 @@ python-dotenv
 razorpay
 sqlmodel
 psycopg2-binary
+bcrypt
+python-jose[cryptography]
+pydantic
+python-multipart

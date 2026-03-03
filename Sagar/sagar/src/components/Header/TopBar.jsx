@@ -2,6 +2,9 @@ import React from "react";
 import "./TopBar.css";
 
 const TopBar = ({ setPage, user }) => {
+  // Check if user is admin session present (set after server verification)
+  const isAdmin = !!localStorage.getItem("adminSession");
+
   return (
     <div className="top-bar">
       <div className="top-bar-container">
@@ -28,14 +31,17 @@ const TopBar = ({ setPage, user }) => {
             <span className="icon">🛍️</span>
             <span>Shop</span>
           </a>
-          <div
-            className="top-bar-link"
-            onClick={() => setPage("admin")}
-            style={{ cursor: "pointer" }}
-          >
-            <span className="icon">⚙️</span>
-            <span>Admin</span>
-          </div>
+          {isAdmin && (
+            <div
+              className="top-bar-link"
+              onClick={() => setPage("admin")}
+              style={{ cursor: "pointer" }}
+              title="Admin Dashboard"
+            >
+              <span className="icon">⚙️</span>
+              <span>Admin</span>
+            </div>
+          )}
           <div
             className="top-bar-link"
             onClick={() => setPage(user ? "account" : "login")}

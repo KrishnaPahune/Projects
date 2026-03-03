@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Home from "./pages/Home";
 import "./global.css";
 import ProductListing from "./pages/ProductListing";
@@ -12,13 +12,67 @@ import OrderDetail from "./pages/OrderDetail";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Account from "./pages/Account";
-import Admin from "./pages/Admin";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminLogin from "./pages/AdminLogin";
+
 function App() {
   const { toast } = useToast();
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8001";
   const [page, setPage] = useState("home");
+  const [adminLoggedIn, setAdminLoggedIn] = useState(!!localStorage.getItem("adminSession"));
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [previousPage, setPreviousPage] = useState("home");
   const [selectedOrderId, setSelectedOrderId] = useState(null);
+
+  useEffect(() => {
+    // If the URL is /admin (or starts with it), open admin page
+    if (window.location.pathname && window.location.pathname.startsWith("/admin")) {
+      setPage("admin");
+    }
+
+    // Verify session with backend token
+    const verify = async () => {
+      try {
+        const token = localStorage.getItem("adminToken");
+        
+        // If no token stored, session is invalid
+        if (!token) {
+          localStorage.removeItem("adminSession");
+          setAdminLoggedIn(false);
+          return;
+        }
+
+        // Verify token via Authorization header
+        const res = await fetch(`${BACKEND_URL}/api/auth/verify`, {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+          },
+          credentials: "include",
+        });
+        
+        if (res.ok) {
+          const data = await res.json();
+          localStorage.setItem("adminSession", "1");
+          localStorage.setItem("adminEmail", data.email);
+          localStorage.setItem("adminName", data.full_name);
+          setAdminLoggedIn(true);
+        } else {
+          // Token invalid or expired
+          localStorage.removeItem("adminSession");
+          localStorage.removeItem("adminToken");
+          setAdminLoggedIn(false);
+        }
+      } catch (e) {
+        console.error("Session verification error:", e);
+        localStorage.removeItem("adminSession");
+        localStorage.removeItem("adminToken");
+        setAdminLoggedIn(false);
+      }
+    };
+
+    verify();
+  }, []);
 
   return (
     <>
@@ -118,8 +172,21 @@ function App() {
         />
       )}
 
-      {page === "admin" && (
-        <Admin />
+      {page === "admin" && !adminLoggedIn && (
+        <AdminLogin
+          onLoginSuccess={(data) => {
+            setAdminLoggedIn(true);
+          }}
+        />
+      )}
+
+      {page === "admin" && adminLoggedIn && (
+        <AdminDashboard
+          onLogout={() => {
+            setAdminLoggedIn(false);
+            setPage("home");
+          }}
+        />
       )}
 
       {toast && <Toast message={toast.message} type={toast.type} />}

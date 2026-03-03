@@ -27,3 +27,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Python virtual environments
+venv/
+.venv/
+backend/venv/
+
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+

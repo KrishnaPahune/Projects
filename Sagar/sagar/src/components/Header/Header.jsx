@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import TopBar from './TopBar';
-import MiddleBar from './MiddleBar';
-import BottomBar from './BottomBar';
-import './Header.css';
+import React, { useState } from "react";
+import TopBar from "./TopBar";
+import MiddleBar from "./MiddleBar";
+import BottomBar from "./BottomBar";
+import "./Header.css";
 import { useCart } from "../../context/CartContext";
 import { useAuth } from "../../context/AuthContext";
 
-
 const Header = ({ goToCart, goHome, setPage }) => {
   const { user } = useAuth();
-
+  const isAdmin = !!localStorage.getItem("adminSession");
   const { cartCount } = useCart();
-  console.log(cartCount);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -20,24 +19,32 @@ const Header = ({ goToCart, goHome, setPage }) => {
 
   return (
     <header className="header">
-      {/* Child Component 1: Top Bar */}
+      {/* Top Bar */}
       <TopBar setPage={setPage} user={user} />
 
-      {/* Child Component 2: Middle Bar */}
-      <MiddleBar onMenuToggle={toggleMenu} goToCart={goToCart} goHome={goHome} />
+      {/* Middle Bar */}
+      <MiddleBar
+        onMenuToggle={toggleMenu}
+        goToCart={goToCart}
+        goHome={goHome}
+      />
 
-      {/* Child Component 3: Bottom Bar */}
+      {/* Bottom Bar */}
       <BottomBar />
 
-      {/* Mobile Sidebar Menu Overlay */}
+      {/* Mobile Sidebar Menu */}
       {isMenuOpen && (
         <>
           <div className="overlay" onClick={toggleMenu}></div>
+
           <div className="mobile-menu">
             <div className="mobile-menu-header">
               <h3>Menu</h3>
-              <button className="close-btn" onClick={toggleMenu}>✕</button>
+              <button className="close-btn" onClick={toggleMenu}>
+                ✕
+              </button>
             </div>
+
             <nav className="mobile-nav">
               <button
                 className="mobile-nav-link"
@@ -48,6 +55,7 @@ const Header = ({ goToCart, goHome, setPage }) => {
               >
                 🏠 Home
               </button>
+
               <button
                 className="mobile-nav-link"
                 onClick={() => {
@@ -57,6 +65,7 @@ const Header = ({ goToCart, goHome, setPage }) => {
               >
                 🛍️ Shop
               </button>
+
               <button
                 className="mobile-nav-link"
                 onClick={() => {
@@ -70,6 +79,7 @@ const Header = ({ goToCart, goHome, setPage }) => {
               >
                 👤 My Account
               </button>
+
               <button
                 className="mobile-nav-link"
                 onClick={() => {
@@ -77,8 +87,21 @@ const Header = ({ goToCart, goHome, setPage }) => {
                   toggleMenu();
                 }}
               >
-                🛒 Cart
+                🛒 Cart ({cartCount})
               </button>
+
+              {/* Admin Button */}
+              {isAdmin && (
+                <button
+                  className="mobile-nav-link"
+                  onClick={() => {
+                    setPage("admin");
+                    toggleMenu();
+                  }}
+                >
+                  ⚙️ Admin Dashboard
+                </button>
+              )}
             </nav>
           </div>
         </>
