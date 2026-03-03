@@ -10,7 +10,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
   const [error, setError] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, retry = false) => {
     e.preventDefault();
     setError("");
     setLoading(true);
@@ -64,6 +64,11 @@ const AdminLogin = ({ onLoginSuccess }) => {
         window.history.pushState({}, "", "/admin");
       } catch (e) {}
     } catch (err) {
+      // network error may be transient; retry once
+      if (!retry && err.message === "Failed to fetch") {
+        console.warn("Initial fetch failed, retrying once...");
+        return handleSubmit(e, true);
+      }
       setError(err.message);
     } finally {
       setLoading(false);

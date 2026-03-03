@@ -27,9 +27,12 @@ app.include_router(products_router)
 app.include_router(auth_router)
 
 # Enable CORS for React frontend
+# Note: when allow_credentials=True you cannot use "*" for origins,
+# so we explicitly list the front-end host(s). This avoids intermittent
+# "Failed to fetch" errors from preflight responses.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000", "*"],
+    allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
