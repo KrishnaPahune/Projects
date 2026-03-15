@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GoLexi Reader</title>
+  <link rel="stylesheet" href="popup.css"/>
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <div class="header-brand">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+        </svg>
+        <span class="brand-name">GoLexi</span>
+        <span class="brand-tagline">Dyslexia Reader</span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-settings-tab" class="icon-btn" title="Settings" aria-label="Settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <nav class="tab-bar" role="tablist">
+      <button class="tab active" data-tab="main" role="tab" aria-selected="true">Reader</button>
+      <button class="tab" data-tab="text" role="tab" aria-selected="false">Text</button>
+      <button class="tab" data-tab="display" role="tab" aria-selected="false">Display</button>
+      <button class="tab" data-tab="tools" role="tab" aria-selected="false">Tools</button>
+    </nav>
+
+    <section class="tab-content active" data-panel="main">
+
+      <div class="card activate-card">
+        <div class="activate-info">
+          <div class="activate-title">GoLexi Reading Mode</div>
+          <div class="activate-sub" id="activate-status-text">Inactive on this page</div>
+        </div>
+        <label class="toggle" aria-label="Toggle GoLexi">
+          <input type="checkbox" id="toggle-active"/>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="card tts-card" id="tts-card">
+        <div class="tts-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="section-icon">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+          <span class="section-title">Audio Reader</span>
+          <span class="tts-wpm" id="tts-wpm-badge">200 WPM</span>
+        </div>
+
+        <div class="tts-controls">
+          <button class="tts-btn" id="btn-stop" title="Stop">
+            <svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+          </button>
+          <button class="tts-btn tts-play-btn" id="btn-play" title="Play">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+            <svg class="pause-icon hidden" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+          </button>
+          <div class="tts-progress-wrap">
+            <div class="tts-progress-bar">
+              <div class="tts-progress-fill" id="tts-progress-fill"></div>
+            </div>
+            <span class="tts-progress-label" id="tts-progress-label">0%</span>
+          </div>
+        </div>
+
+        <div class="speed-row">
+          <span class="speed-label">Speed</span>
+          <input type="range" id="speed-slider" class="range-input" min="80" max="400" step="10" value="200"/>
+          <span class="speed-val" id="speed-val">200</span>
+          <span class="speed-unit">WPM</span>
+        </div>
+
+        <div class="voice-row">
+          <label class="field-label">Voice</label>
+          <select id="voice-select" class="select-input"></select>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toggle-list">
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <span class="toggle-label">Focus Mode</span>
+              <span class="toggle-desc">Highlight one paragraph at a time</span>
+            </div>
+            <label class="toggle sm">
+              <input type="checkbox" id="toggle-focus"/>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <span class="toggle-label">Reading Ruler</span>
+              <span class="toggle-desc">Line guide follows your cursor</span>
+            </div>
+            <label class="toggle sm">
+              <input type="checkbox" id="toggle-ruler"/>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <span class="toggle-label">Colour Overlay</span>
+              <span class="toggle-desc">Tint the page to reduce glare</span>
+            </div>
+            <label class="toggle sm">
+              <input type="checkbox" id="toggle-overlay"/>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="tab-content" data-panel="text">
+
+      <div class="card">
+        <label class="field-label">Font Family</label>
+        <select id="font-select" class="select-input">
+          <option value="Arial">Arial</option>
+          <option value="OpenDyslexic">OpenDyslexic ★</option>
+          <option value="Verdana">Verdana</option>
+          <option value="Tahoma">Tahoma</option>
+          <option value="Comic Sans">Comic Sans MS</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Trebuchet">Trebuchet MS</option>
+          <option value="Times New Roman">Times New Roman</option>
+        </select>
+        <p class="field-hint">OpenDyslexic is designed for dyslexia</p>
+      </div>
+
+      <div class="card">
+        <div class="slider-field">
+          <label class="field-label">Font Size <span class="val-badge" id="font-size-val">18px</span></label>
+          <input type="range" id="font-size-slider" class="range-input" min="12" max="36" step="1" value="18"/>
+          <div class="range-labels"><span>12px</span><span>36px</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="slider-field">
+          <label class="field-label">Line Spacing <span class="val-badge" id="line-spacing-val">1.8×</span></label>
+          <input type="range" id="line-spacing-slider" class="range-input" min="1" max="3" step="0.1" value="1.8"/>
+          <div class="range-labels"><span>1×</span><span>3×</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="slider-field">
+          <label class="field-label">Letter Spacing <span class="val-badge" id="letter-spacing-val">0.5px</span></label>
+          <input type="range" id="letter-spacing-slider" class="range-input" min="0" max="5" step="0.5" value="0.5"/>
+          <div class="range-labels"><span>0</span><span>5px</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="slider-field">
+          <label class="field-label">Word Spacing <span class="val-badge" id="word-spacing-val">0.3em</span></label>
+          <input type="range" id="word-spacing-slider" class="range-input" min="0" max="1" step="0.1" value="0.3"/>
+          <div class="range-labels"><span>0</span><span>1em</span></div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="tab-content" data-panel="display">
+
+      <div class="card">
+        <label class="field-label">Colour Theme</label>
+        <div class="theme-grid" id="theme-grid">
+          <button class="theme-swatch active" data-theme="cream" style="--swatch-bg:#fef9f0;--swatch-text:#3d2b1f" title="Cream">
+            <span class="swatch-preview"></span>
+            <span>Cream</span>
+          </button>
+          <button class="theme-swatch" data-theme="dark" style="--swatch-bg:#1e1e2e;--swatch-text:#cdd6f4" title="Dark">
+            <span class="swatch-preview"></span>
+            <span>Dark</span>
+          </button>
+          <button class="theme-swatch" data-theme="pastel" style="--swatch-bg:#f5f0ff;--swatch-text:#3b1f5e" title="Pastel">
+            <span class="swatch-preview"></span>
+            <span>Pastel</span>
+          </button>
+          <button class="theme-swatch" data-theme="blue" style="--swatch-bg:#eff6ff;--swatch-text:#1e3a5f" title="Blue">
+            <span class="swatch-preview"></span>
+            <span>Blue</span>
+          </button>
+          <button class="theme-swatch" data-theme="green" style="--swatch-bg:#f0fdf4;--swatch-text:#14532d" title="Green">
+            <span class="swatch-preview"></span>
+            <span>Green</span>
+          </button>
+          <button class="theme-swatch" data-theme="yellow" style="--swatch-bg:#fefce8;--swatch-text:#713f12" title="Yellow">
+            <span class="swatch-preview"></span>
+            <span>Yellow</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <label class="field-label">Highlight Colour</label>
+        <div class="highlight-colors" id="highlight-grid">
+          <button class="highlight-swatch active" data-color="#fef08a" style="background:#fef08a" title="Yellow"></button>
+          <button class="highlight-swatch" data-color="#bbf7d0" style="background:#bbf7d0" title="Green"></button>
+          <button class="highlight-swatch" data-color="#bfdbfe" style="background:#bfdbfe" title="Blue"></button>
+          <button class="highlight-swatch" data-color="#fecdd3" style="background:#fecdd3" title="Pink"></button>
+          <button class="highlight-swatch" data-color="#fed7aa" style="background:#fed7aa" title="Orange"></button>
+          <button class="highlight-swatch" data-color="#e9d5ff" style="background:#e9d5ff" title="Purple"></button>
+        </div>
+      </div>
+
+      <div class="card" id="overlay-settings">
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <span class="toggle-label">Colour Overlay</span>
+          </div>
+          <label class="toggle sm">
+            <input type="checkbox" id="toggle-overlay-2"/>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div id="overlay-detail" class="overlay-detail hidden">
+          <label class="field-label mt-sm">Overlay Colour</label>
+          <div class="highlight-colors" id="overlay-color-grid">
+            <button class="highlight-swatch active" data-color="#fef9c3" style="background:#fef9c3" title="Yellow"></button>
+            <button class="highlight-swatch" data-color="#d1fae5" style="background:#d1fae5" title="Green"></button>
+            <button class="highlight-swatch" data-color="#dbeafe" style="background:#dbeafe" title="Blue"></button>
+            <button class="highlight-swatch" data-color="#fce7f3" style="background:#fce7f3" title="Pink"></button>
+            <button class="highlight-swatch" data-color="#f5f3ff" style="background:#f5f3ff" title="Lavender"></button>
+          </div>
+          <label class="field-label mt-sm">Opacity <span class="val-badge" id="overlay-opacity-val">30%</span></label>
+          <input type="range" id="overlay-opacity-slider" class="range-input" min="0.05" max="0.6" step="0.05" value="0.3"/>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="tab-content" data-panel="tools">
+
+      <div class="card">
+        <p class="section-title-sm">Accessibility Presets</p>
+        <div class="preset-grid">
+          <button class="preset-btn" data-preset="dyslexia">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            Dyslexia
+          </button>
+          <button class="preset-btn" data-preset="lowvision">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Low Vision
+          </button>
+          <button class="preset-btn" data-preset="focus">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+            Focus
+          </button>
+          <button class="preset-btn" data-preset="night">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            Night
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="section-title-sm">Page Actions</p>
+        <div class="action-list">
+          <button class="action-btn" id="btn-extract-text">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            View Extracted Text
+          </button>
+          <button class="action-btn" id="btn-reset">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.44"/></svg>
+            Reset All Settings
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="section-title-sm">About GoLexi</p>
+        <p class="about-text">GoLexi is an adaptive, dyslexia-friendly reading assistant that customises fonts, spacing, colours and audio to make every webpage easier to read.</p>
+        <p class="about-version">Version 1.0.0</p>
+      </div>
+
+    </section>
+
+    <div class="modal hidden" id="text-modal">
+      <div class="modal-box">
+        <div class="modal-header">
+          <span>Extracted Page Text</span>
+          <button id="close-modal" class="icon-btn">✕</button>
+        </div>
+        <textarea id="extracted-text-area" readonly></textarea>
+        <div class="modal-actions">
+          <button class="modal-btn" id="copy-text-btn">Copy Text</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

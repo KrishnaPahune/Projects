@@ -1,0 +1,23 @@
+/* GoLexi Content Styles - injected into every page */
+
+/* OpenDyslexic font via base64 or system fallback */
+/* Actual font would be bundled in production */
+
+.golexi-word-highlight {
+  background-color: #fef08a !important;
+  border-radius: 3px !important;
+  padding: 0 2px !important;
+  font-weight: bold !important;
+  outline: 2px solid rgba(0,0,0,0.15) !important;
+  transition: background-color 0.1s !important;
+}
+
+.golexi-sentence-highlight {
+  background-color: #fef9c388 !important;
+  border-radius: 4px !important;
+}
+
+.golexi-focus-dim {
+  opacity: 0.2 !important;
+  transition: opacity 0.25s ease !important;
+}
