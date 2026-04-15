@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distributed Voting System</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .status-open {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-closed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .candidates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .candidate-card {
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .candidate-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .candidate-card.selected {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .candidate-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .candidate-votes {
+            color: #667eea;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .vote-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .vote-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+        }
+
+        .vote-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .live-stats {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 2px solid #e9ecef;
+        }
+
+        .stats-title {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .stat-item span:last-child {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1.2rem;
+        }
+
+        .admin-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .admin-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .admin-link a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗳️ Distributed Voting System</h1>
+            <p>Cast your vote securely and see real-time results</p>
+        </div>
+
+        <div id="votingStatus" class="status-indicator status-open">
+            Voting is Open
+        </div>
+
+        <form id="votingForm">
+            <div class="form-group">
+                <label for="voterName">Your Name</label>
+                <input type="text" id="voterName" name="voterName" required placeholder="Enter your name">
+            </div>
+
+            <div class="form-group">
+                <label for="voterId">Voting Number <span style="color: #e74c3c; font-size: 0.9rem;">*</span></label>
+                <input type="text" id="voterId" name="voterId" required placeholder="Enter your unique voting number">
+                <small style="color: #666; font-size: 0.85rem; display: block; margin-top: 5px;">This must be unique for each voter</small>
+            </div>
+
+            <div class="form-group">
+                <label>Select a Candidate</label>
+                <div id="candidatesGrid" class="candidates-grid">
+                    <!-- Candidates will be populated here -->
+                </div>
+            </div>
+
+            <button type="submit" id="voteBtn" class="vote-btn">
+                Submit Vote
+            </button>
+        </form>
+
+        <div id="message" class="message"></div>
+
+        <div class="live-stats">
+            <div class="stats-title">📊 Live Statistics</div>
+            <div class="stat-item">
+                <span>Total Votes:</span>
+                <span id="totalVotes">0</span>
+            </div>
+            <div class="stat-item">
+                <span>Active Voters:</span>
+                <span id="activeVoters">0</span>
+            </div>
+            <div class="stat-item">
+                <span>Auto-reset in:</span>
+                <span id="countdown">30s</span>
+            </div>
+        </div>
+
+        <div class="admin-link">
+            <a href="/admin">Admin Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        const socket = io();
+        let selectedCandidate = null;
+        let hasVoted = false;
+        let resetTimer = null;
+        let countdownTimer = null;
+        let countdownSeconds = 30;
+
+        // DOM elements
+        const votingForm = document.getElementById('votingForm');
+        const candidatesGrid = document.getElementById('candidatesGrid');
+        const voteBtn = document.getElementById('voteBtn');
+        const message = document.getElementById('message');
+        const votingStatus = document.getElementById('votingStatus');
+        const totalVotesEl = document.getElementById('totalVotes');
+        const activeVotersEl = document.getElementById('activeVoters');
+        const countdownEl = document.getElementById('countdown');
+
+        // Initialize candidates
+        function initializeCandidates(candidates) {
+            candidatesGrid.innerHTML = '';
+            candidates.forEach(candidate => {
+                const card = document.createElement('div');
+                card.className = 'candidate-card';
+                card.dataset.candidateId = candidate.id;
+                card.innerHTML = `
+                    <div class="candidate-name">${candidate.name}</div>
+                `;
+                card.addEventListener('click', () => selectCandidate(candidate.id));
+                candidatesGrid.appendChild(card);
+            });
+        }
+
+        // Select candidate
+        function selectCandidate(candidateId) {
+            if (hasVoted) return;
+            
+            document.querySelectorAll('.candidate-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            const selectedCard = document.querySelector(`[data-candidate-id="${candidateId}"]`);
+            if (selectedCard) {
+                selectedCard.classList.add('selected');
+                selectedCandidate = candidateId;
+                startResetTimer(); // Reset timer when candidate is selected
+            }
+        }
+
+        // Show message
+        function showMessage(text, type) {
+            message.textContent = text;
+            message.className = `message ${type}`;
+            message.style.display = 'block';
+            
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 5000);
+        }
+
+        // Reset timer functions
+        function startResetTimer() {
+            clearResetTimer();
+            countdownSeconds = 30;
+            updateCountdown();
+            console.log('Reset timer started for 30 seconds');
+            
+            // Start countdown timer
+            countdownTimer = setInterval(() => {
+                countdownSeconds--;
+                updateCountdown();
+                if (countdownSeconds <= 0) {
+                    clearInterval(countdownTimer);
+                }
+            }, 1000);
+            
+            resetTimer = setTimeout(() => {
+                console.log('Timer expired - resetting interface');
+                clearInterval(countdownTimer);
+                resetUserInterface();
+            }, 30000); // 30 seconds
+        }
+
+        function clearResetTimer() {
+            if (resetTimer) {
+                clearTimeout(resetTimer);
+                resetTimer = null;
+                console.log('Reset timer cleared');
+            }
+            if (countdownTimer) {
+                clearInterval(countdownTimer);
+                countdownTimer = null;
+            }
+        }
+
+        function updateCountdown() {
+            if (countdownEl) {
+                countdownEl.textContent = `${countdownSeconds}s`;
+                // Change color when time is running out
+                if (countdownSeconds <= 10) {
+                    countdownEl.style.color = '#e74c3c';
+                } else {
+                    countdownEl.style.color = '#667eea';
+                }
+            }
+        }
+
+        function resetUserInterface() {
+            console.log('Resetting user interface');
+            // Clear form fields
+            document.getElementById('voterName').value = '';
+            document.getElementById('voterId').value = '';
+            
+            // Clear candidate selection
+            document.querySelectorAll('.candidate-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            selectedCandidate = null;
+            
+            // Reset button state (only if user hasn't voted)
+            if (!hasVoted) {
+                voteBtn.disabled = false;
+                voteBtn.textContent = 'Submit Vote';
+            }
+            
+            // Show reset notification
+            showMessage('Form has been reset due to inactivity', 'success');
+            
+            // Restart timer after reset
+            startResetTimer();
+        }
+
+        function resetAfterVote() {
+            // Reset voting state
+            hasVoted = false;
+            
+            // Clear form fields
+            document.getElementById('voterName').value = '';
+            document.getElementById('voterId').value = '';
+            
+            // Clear candidate selection
+            document.querySelectorAll('.candidate-card').forEach(card => {
+                card.classList.remove('selected');
+                card.style.pointerEvents = 'auto';
+            });
+            selectedCandidate = null;
+            
+            // Reset button
+            voteBtn.disabled = false;
+            voteBtn.textContent = 'Submit Vote';
+            
+            // Enable form inputs
+            votingForm.querySelectorAll('input').forEach(input => input.disabled = false);
+            
+            // Show notification
+            showMessage('Form ready for next voter', 'success');
+            
+            // Restart timer
+            startResetTimer();
+        }
+
+        // Update voting status
+        function updateVotingStatus(isActive) {
+            if (isActive) {
+                votingStatus.textContent = 'Voting is Open';
+                votingStatus.className = 'status-indicator status-open';
+                voteBtn.disabled = false;
+            } else {
+                votingStatus.textContent = 'Voting is Closed';
+                votingStatus.className = 'status-indicator status-closed';
+                voteBtn.disabled = true;
+            }
+        }
+
+        // Handle form submission
+        votingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearResetTimer();
+            
+            if (hasVoted) {
+                showMessage('You have already voted!', 'error');
+                return;
+            }
+            
+            if (!selectedCandidate) {
+                showMessage('Please select a candidate', 'error');
+                return;
+            }
+            
+            const voterName = document.getElementById('voterName').value.trim();
+            const votingNumber = document.getElementById('voterId').value.trim();
+            
+            if (!voterName || !votingNumber) {
+                showMessage('Please fill in all fields', 'error');
+                return;
+            }
+            
+            // Submit vote
+            socket.emit('submit-vote', {
+                voterName,
+                voterId: votingNumber,
+                candidateId: selectedCandidate
+            });
+            
+            voteBtn.disabled = true;
+            voteBtn.textContent = 'Submitting...';
+        });
+
+        // Add event listeners for form interactions to start/reset timer
+        document.getElementById('voterName').addEventListener('input', () => {
+            console.log('Name field input detected');
+            startResetTimer();
+        });
+        document.getElementById('voterId').addEventListener('input', () => {
+            console.log('ID field input detected');
+            startResetTimer();
+        });
+        
+        // Start timer when page loads
+        console.log('Page loaded - starting initial timer');
+        startResetTimer();
+
+        // Socket event listeners
+        socket.on('voting-data', (data) => {
+            initializeCandidates(data.candidates);
+            updateVotingStatus(data.isActive);
+            totalVotesEl.textContent = data.totalVotes;
+            activeVotersEl.textContent = data.totalVotes;
+        });
+
+        socket.on('vote-updated', (data) => {
+            initializeCandidates(data.candidates);
+            totalVotesEl.textContent = data.totalVotes;
+            activeVotersEl.textContent = data.totalVotes;
+
+socket.on('vote-confirmed', (data) => {
+    hasVoted = true;
+    showMessage(data.message, 'success');
+    voteBtn.textContent = 'Vote Submitted';
+    votingForm.querySelectorAll('input').forEach(input => input.disabled = true);
+    document.querySelectorAll('.candidate-card').forEach(card => {
+        card.style.pointerEvents = 'none';
+    });
+    
+    // Automatically reset form after 3 seconds
+    setTimeout(() => {
+        resetAfterVote();
+    }, 3000);
+});
+
+socket.on('vote-error', (data) => {
+    showMessage(data.message, 'error');
+    voteBtn.disabled = false;
+});
+        });
+
+        socket.on('voting-status-changed', (data) => {
+            updateVotingStatus(data.isActive);
+        });
+
+        socket.on('votes-reset', () => {
+            hasVoted = false;
+            voteBtn.disabled = false;
+            voteBtn.textContent = 'Submit Vote';
+            votingForm.querySelectorAll('input').forEach(input => {
+                input.disabled = false;
+                input.value = '';
+            });
+            document.querySelectorAll('.candidate-card').forEach(card => {
+                card.style.pointerEvents = 'auto';
+                card.classList.remove('selected');
+            });
+            selectedCandidate = null;
+            showMessage('Voting has been reset', 'success');
+        });
+    </script>
+</body>
+</html>
